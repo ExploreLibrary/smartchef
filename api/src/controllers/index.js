@@ -13,5 +13,7 @@ router.get("/users/profile", auth, usersController.profile);
 router.get("/pantry", auth, pantryItemsController.list);
 router.post("/pantry", auth, pantryItemsController.create);
 router.get("/pantry/:id", auth, pantryItemsController.detail);
+router.patch("/pantry/:id", auth, pantryItemsController.update)
+router.delete("/pantry/:id", auth, pantryItemsController.deleteItem);
 
 module.exports = router;
