@@ -45,8 +45,8 @@ const logout = (req, res, next) => {
 
 const profile = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user._id).populate("posts");
-
+    const user = await User.findById(req.user._id);
+    
     res.json(user);
   } catch (error) {
     next(error);
