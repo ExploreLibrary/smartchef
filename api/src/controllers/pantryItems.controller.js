@@ -48,8 +48,55 @@ const detail = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  try {
+    const pantryItem = await PantryItem.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        user: req.user._id
+      },
+      req.body,
+      {
+        new: true,
+        runValidators: true
+      }
+    );
+
+    if (!pantryItem) {
+      return res.status(404).json({
+        message: "Pantry item not found"
+      });
+    }
+
+    res.json(pantryItem);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteItem = async (req, res, next) => {
+  try {
+    const pantryItem = await PantryItem.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user._id
+    });
+
+    if (!pantryItem) {
+      return res.status(404).json({
+        message: "Pantry item not found"
+      });
+    }
+
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   create,
   list,
-  detail
+  detail,
+  update,
+  deleteItem
 };
