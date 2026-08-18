@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const config = require("./config");
+const logger = require("./logger");
 
-mongoose.connect(process.env.MONGODB_URI).catch((error) => {
-  console.error(error);
+mongoose.connect(config.get("db.uri")).catch((error) => {
+  logger.error(error);
   process.exit(0);
 });
