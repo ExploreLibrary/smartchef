@@ -1,10 +1,8 @@
-require("dotenv").config();
-
 const app = require("./app");
 require("./lib/db");
+const config = require("./lib/config");
+const logger = require("./lib/logger");
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`API running on http://localhost:${PORT}`);
+app.listen(config.get("port"), () => {
+  logger.info(`Server listening at port ${config.get("port")}`);
 });
