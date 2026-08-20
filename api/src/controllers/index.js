@@ -3,6 +3,7 @@ const usersController = require("./users.controller");
 const auth = require("../middlewares/auth.mid");
 const pantryItemsController = require("./pantryItems.controller");
 const favoritesController = require("./favorites.controller");
+const recipesController = require("./recipes.controller");
 
 const router = express.Router();
 
@@ -21,5 +22,9 @@ router.get("/favorites", auth, favoritesController.list);
 router.post("/favorites", auth, favoritesController.create);
 router.get("/favorites/:id", auth, favoritesController.detail);
 router.delete("/favorites/:id", auth, favoritesController.deleteItem);
+
+router.get("/recipes/search", recipesController.search);
+router.get("/recipes/:mealId/check-pantry", auth, recipesController.checkPantry);
+router.get("/recipes/:mealId", recipesController.detail);
 
 module.exports = router;
