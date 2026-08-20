@@ -6,20 +6,30 @@ const notFound = (req, res, next) => {
 };
 
 const globalHandler = (err, req, res, next) => {
-  if (error instanceof mongoose.Error.ValidationError) {
+  if (err instanceof mongoose.Error.ValidationError) {
     const errors = Object.fromEntries(
-      Object.entries(error.errors).map(([key, val]) => [key, val.message]),
+      Object.entries(err.errors).map(([key, val]) => [key, val.message])
     );
-    return res.status(400).json({ message: "Validation error", errors });
+
+    return res.status(400).json({
+      message: "Validation error",
+      errors
+    });
   }
 
-  if (error instanceof mongoose.Error.CastError && error.path === "_id") {
-    return res.status(404).json({ message: "Resource not found" });
+  if (err instanceof mongoose.Error.CastError && err.path === "_id") {
+    return res.status(404).json({
+      message: "Resource not found"
+    });
   }
 
-  const status = error.status || 500;
-  req.log.error(error);
-  res.status(status).json({ message: error.message });
+  const status = err.status || 500;
+
+  req.log.error(err);
+
+  res.status(status).json({
+    message: err.message
+  });
 };
 
 module.exports = { notFound, globalHandler };
