@@ -27,10 +27,10 @@ http.interceptors.response.use(
 );
 
 // --- Auth ---
-export const login = (data) => http.post("/sessions", data);
+export const login = (data) => http.post("/users/login", data);
 export const signup = (data) => http.post("/users", data);
 export const logout = () => http.delete("/sessions");
-export const getProfile = () => http.get("/users/me");
+export const getProfile = () => http.get("/users/profile");
 
 // --- Posts ---
 export const listPosts = () => http.get("/posts");
