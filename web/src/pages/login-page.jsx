@@ -1,11 +1,13 @@
-import { Navbar } from "../components/ui";
+import { PageLayout } from "../layouts";
+import { LoginForm } from "../components/auth";
+
 
 function LoginPage() {
     return (
-        <div>
-        <Navbar/>
-            <h1>Login Page</h1>
-        </div>
+        <PageLayout>
+            <h1>Welcome to SmartChef</h1>
+            <LoginForm />
+        </PageLayout>
     );
 }
 

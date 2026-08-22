@@ -8,5 +8,42 @@
 
 html {
   color: #fefefe;
+  background-color: #000000;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cinzel', serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
   background-color: #111111;
+  padding: 0 20px;
+  min-height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.navbar__logo {
+  width: 120px;
+  height: auto;
+}
+
+.navbar__menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar__menu-icon {
+  width: 30px;
+  height: auto;
 }
