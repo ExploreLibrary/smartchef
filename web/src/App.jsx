@@ -1,6 +1,4 @@
 import { Routes, Route } from "react-router";
-import { PrivateRoute } from "./guards";
-import { Navbar } from "./components/ui";
 import {
   LoginPage,
 } from "./pages";
@@ -8,7 +6,6 @@ import {
 function App() {
   return (
     <>
-      <Navbar />
       <Routes>
         <Route path="/login" element={<LoginPage />}
         />
