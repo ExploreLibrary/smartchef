@@ -19,7 +19,11 @@ export function AuthContextProvider({ children }) {
         const user = await api.getProfile();
         setUser(user);
       } catch (err) {
-        navigate("/login");
+        // Don't force navigation if the user is already visiting a public route
+        const pathname = typeof window !== "undefined" ? window.location.pathname : "";
+        if (pathname !== "/login" && pathname !== "/register") {
+          navigate("/login");
+        }
       } finally {
         setLoading(false);
       }
