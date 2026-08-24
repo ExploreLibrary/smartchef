@@ -1,6 +1,7 @@
 import axios from "axios";
 import { LS_USER_KEY } from "../contexts/auth-context";
 
+
 // axios.create() genera una instancia preconfigurada con baseURL y opciones comunes.
 // Así no repetimos la URL base ni las opciones en cada llamada a la API.
 const http = axios.create({
@@ -18,7 +19,8 @@ const http = axios.create({
 http.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    if (error.status === 401 && location.pathname !== "/login") {
+    // Axios places HTTP status on error.response.status; handle network errors safely
+    if (error.response?.status === 401 && location.pathname !== "/login" && location.pathname !== "/register") {
       window.location = "/login";
     }
 
