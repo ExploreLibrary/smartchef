@@ -4,6 +4,7 @@ const auth = require("../middlewares/auth.mid");
 const pantryItemsController = require("./pantryItems.controller");
 const favoritesController = require("./favorites.controller");
 const recipesController = require("./recipes.controller");
+const mealCategoriesController = require("./mealCategories.controller");
 
 const router = express.Router();
 
@@ -26,5 +27,8 @@ router.delete("/favorites/:id", auth, favoritesController.deleteItem);
 router.get("/recipes/search", recipesController.search);
 router.get("/recipes/:mealId/check-pantry", auth, recipesController.checkPantry);
 router.get("/recipes/:mealId", recipesController.detail);
+
+router.get("/meal-categories/:category", auth, mealCategoriesController.search);
+
 
 module.exports = router;
