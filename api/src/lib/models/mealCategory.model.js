@@ -24,18 +24,15 @@ const mealCategorySchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-         toJSON: {
+    toJSON: {
       transform(doc, ret) {
-        ret.mealName = ret.strMeal;
-        ret.mealThumb = ret.strMealThumb;
-        ret.externalId = ret.id;
-        ret.country = ret.strCountry;
-
-        delete ret.strArea;
+        delete ret._id;
+        delete ret.__v;
+        delete ret.createdAt;
+        delete ret.updatedAt;
       }
     }
-  } 
-
+  }
 );
 
 module.exports = mongoose.model("mealCategory", mealCategorySchema);
