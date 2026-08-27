@@ -1,8 +1,7 @@
 import { PageLayout } from "../layouts";
 import { useAuth } from "../contexts/auth-context";
-import Gallery from "../components/gallery/gallery";
 
-function HomePage() {
+function RecipeDetailPage() {
   const { user } = useAuth();
   return (
     <PageLayout>
@@ -29,4 +28,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default RecipeDetailPage;
