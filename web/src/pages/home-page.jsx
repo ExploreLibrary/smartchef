@@ -1,5 +1,6 @@
 import { PageLayout } from "../layouts";
 import { useAuth } from "../contexts/auth-context";
+import Gallery from "../components/gallery/gallery";
 
 function RecipeDetailPage() {
   const { user } = useAuth();
