@@ -11,16 +11,16 @@ function HomePage() {
       <h2> Hello, {user?.name || "there"}! </h2>
 
       <h3> Discover Delicious  vegan Recipes </h3>
-      <Gallery />
+      <Gallery category="Vegan" />
 
       <h3> Discover Delicious  chicken Recipes </h3>
-      <Gallery />
+      <Gallery category="Chicken" />
 
       <h3> Discover Delicious  seafood Recipes </h3>
-      <Gallery />
+      <Gallery category="Seafood" />
 
       <h3> Discover Delicious  dessert Recipes </h3>
-      <Gallery />
+      <Gallery category="Dessert" />
 
       <h3> Favorite Recipes </h3>
 

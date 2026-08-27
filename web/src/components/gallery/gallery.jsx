@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getMealByCategory } from "../../services/api-service";
+import { getMealsByCategory } from "../../services/api-service";
 
 
-function Gallery() {
+function Gallery({ category }) {
 
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,9 +22,18 @@ function Gallery() {
     fetchMeals();
   }, [category]);
 
+  if (loading) return <p>Loading meals...</p>;
+  if (isError) return <p>Unable to load meals.</p>;
+
   return (
     <div className="gallery">
-        My Gallery
+      {meals.map((meal) => (
+        <article key={meal.externalId}>
+          <img src={meal.mealThumb} alt={meal.mealName} />
+          <h4>{meal.mealName}</h4>
+          {meal.country && <p>{meal.country}</p>}
+        </article>
+      ))}
     </div>
   );
 }
