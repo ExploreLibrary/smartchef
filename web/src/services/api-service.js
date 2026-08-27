@@ -46,3 +46,7 @@ export const createComment = (postId, data) =>
   http.post(`/posts/${postId}/comments`, data);
 export const deleteComment = (postId, commentId) =>
   http.delete(`/posts/${postId}/comments/${commentId}`);
+
+// --- Meal Categories ---
+export const getMealsByCategory = (category) => 
+  http.get(`/meal-categories/${category}`);
