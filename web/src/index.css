@@ -25,6 +25,14 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 100vh;
 }
 
+.main-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 40px;
+  width: 100%;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -96,4 +104,20 @@ h1, h2, h3, h4, h5, h6 {
   border: none;
   padding: 5px 10px;
   margin-top: 10px;
+}
+
+.gallery {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.gallery__meal {
+  flex: calc(20% - 15px);
+}
+
+.gallery__meal img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
