@@ -32,7 +32,9 @@ function Gallery({ category }) {
         {meals.slice(0, 5).map((meal) => (
           <article className="gallery__meal" key={meal.externalId}>
             <Link className="gallery__meal-img-link" to={`/recipes/${meal.externalId}`}>
-              <img src={meal.mealThumb} alt={meal.mealName} />
+              <div className="gallery__meal-img-container">
+                <img src={meal.mealThumb} alt={meal.mealName} />
+              </div>
             </Link>
             <h4>{meal.mealName}</h4>
             {meal.country && <p>{meal.country}</p>}
@@ -40,7 +42,7 @@ function Gallery({ category }) {
           </article>
         ))}
       </div>
-      
+
       )}
     </div>
   );

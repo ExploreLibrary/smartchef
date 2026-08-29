@@ -228,6 +228,13 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 8px;
 }
 
+.gallery__meal-img-container {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  background: #222222;
+}
+
 .gallery__meal-img-link:hover img {
   transform: scale(1.2);
 }
