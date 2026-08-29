@@ -7,7 +7,7 @@ function RecipeDetailPage() {
   return (
     <PageLayout>
     <div className="main-content main-content--home">
-      <h1 className="welcome">{(user) ? `Welcome to SmartChef, ${user.name}`: `Welcome to SmartChef` }</h1>
+      <h1 className="welcome">{(user) ? `Welcome to your own awesome recipes, ${user.name}!`: `Welcome!` }</h1>
       
       <div>
         <h3 className="home-category-title"> Discover Delicious  vegan Recipes </h3>
