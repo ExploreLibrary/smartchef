@@ -6,8 +6,10 @@ function RecipeDetail({ recipeData }) {
       <h2>Recipe: {recipe.strMeal ?? "Receta sin definir"}</h2>
       <p>Recipe ID: {recipe.idMeal ?? "N/A"}</p>
       {recipe.strMealThumb && (
-        <div className="recipe-detail__image-container">
-          <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+        <div className="recipe-detail__image-outer-container">
+          <div className="recipe-detail__image-container">
+            <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+          </div>
         </div>
       )}
       <p>Country: {recipe.strCountry ?? "Country not specified"}</p>

@@ -29,7 +29,9 @@ function Gallery({ category }) {
     <div className="gallery">
       {meals.slice(0, 5).map((meal) => (
         <article className="gallery__meal" key={meal.externalId}>
-          <img src={meal.mealThumb} alt={meal.mealName} />
+          <Link className="gallery__meal-img-link" to={`/recipes/${meal.externalId}`}>
+            <img src={meal.mealThumb} alt={meal.mealName} />
+          </Link>
           <h4>{meal.mealName}</h4>
           {meal.country && <p>{meal.country}</p>}
           <Link className="gallery__meal-link" to={`/recipes/${meal.externalId}`}>View recipe</Link>
