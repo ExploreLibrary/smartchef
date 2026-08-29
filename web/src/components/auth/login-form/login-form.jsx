@@ -53,45 +53,48 @@ function LoginForm() {
         <h4 className="login-form__title">Login</h4>
       </div>
 
-      <div className="login-form__field">
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-slate-700 mb-1"
-        >
-          Email
-        </label>
-        <input
-          id="email"
-          type="email"
-          // register conecta este input al formulario: gestiona value, onChange y onBlur
-          {...register("email", { required: "El email es obligatorio" })}
-          className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          placeholder="tu@email.com"
-        />
-        {errors.email && (
-          <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>
-        )}
-      </div>
+      <div className="login-form__body">
 
-      <div className="login-form__field">
-        <label
-          htmlFor="password"
-          className="block text-sm font-medium text-slate-700 mb-1"
-        >
-          Contraseña
-        </label>
-        <input
-          id="password"
-          type="password"
-          {...register("password", {
-            required: "La contraseña es obligatoria",
-          })}
-          className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          placeholder="••••••••"
-        />
-        {errors.password && (
-          <p className="text-red-600 text-sm mt-1">{errors.password.message}</p>
-        )}
+        <div className="login-form__field">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-slate-700 mb-1"
+          >
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            // register conecta este input al formulario: gestiona value, onChange y onBlur
+            {...register("email", { required: "El email es obligatorio" })}
+            className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="tu@email.com"
+          />
+          {errors.email && (
+            <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>
+          )}
+        </div>
+
+        <div className="login-form__field">
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-slate-700 mb-1"
+          >
+            Contraseña
+          </label>
+          <input
+            id="password"
+            type="password"
+            {...register("password", {
+              required: "La contraseña es obligatoria",
+            })}
+            className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="••••••••"
+          />
+          {errors.password && (
+            <p className="text-red-600 text-sm mt-1">{errors.password.message}</p>
+          )}
+        </div>
       </div>
 
       <div className="login-form__footer">
