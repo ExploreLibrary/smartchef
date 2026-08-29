@@ -111,8 +111,22 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 40px;
 }
 
+.login-form__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: center;
+}
+
+.login-form__global-error {
+  background: rgba(255, 255, 255, 0.75);
+  color: #eb0c0c;
+  padding: 7px;
+  border-radius: 4px;
+}
+
 .login-form {
-  max-width: 400px;
+  width: 410px;
   margin: 50px auto;
   padding: 20px;
   background-color: #222222;
@@ -120,6 +134,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  position: relative;
 }
 
 .login-form__title {
@@ -146,6 +161,26 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px;
   padding: 20px 10px;
   line-height: 1.5;
+}
+
+.login-form__email-error {
+  position: absolute;
+  right: 0;
+  background: rgba(255, 255, 255, 0.75);
+  color: #eb0c0c;
+  padding: 7px;
+  transform: translateX(calc(100% - 70px));
+  border-radius: 4px;
+}
+
+.login-form__password-error {
+  position: absolute;
+  right: 0;
+  background: rgba(255, 255, 255, 0.75);
+  color: #eb0c0c;
+  padding: 7px;
+  transform: translateX(calc(100% - 70px));
+  border-radius: 4px;
 }
 
 .login-form__footer {

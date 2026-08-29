@@ -42,13 +42,8 @@ function LoginForm() {
   };
 
   return (
+    <div className="login-form__container">
     <form onSubmit={handleSubmit(handleFormSubmit)} className="login-form">
-      {errors.root && (
-        <p className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-3 py-2">
-          {errors.root.message}
-        </p>
-      )}
-
       <div className="login-form__header">
         <h4 className="login-form__title">Login</h4>
       </div>
@@ -71,7 +66,7 @@ function LoginForm() {
             placeholder="tu@email.com"
           />
           {errors.email && (
-            <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>
+            <p className="login-form__email-error">{errors.email.message}</p>
           )}
         </div>
 
@@ -92,7 +87,7 @@ function LoginForm() {
             placeholder="••••••••"
           />
           {errors.password && (
-            <p className="text-red-600 text-sm mt-1">{errors.password.message}</p>
+            <p className="login-form__password-error">{errors.password.message}</p>
           )}
         </div>
       </div>
@@ -107,6 +102,12 @@ function LoginForm() {
         </button>
       </div>
     </form>
+    {errors.root && (
+    <p className="login-form__global-error">
+         {errors.root.message}
+    </p>
+    )}
+    </div>
   );
 }
 
