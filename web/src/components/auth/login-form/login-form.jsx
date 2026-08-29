@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../../services/api-service";
 
 // LoginForm recibe onSubmit desde LoginPage.

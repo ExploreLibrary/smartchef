@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import * as AuthService from "../../../services/api-service";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 
 function RegisterForm() {

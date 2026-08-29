@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { PageLayout } from "../layouts";
 import { useAuth } from "../contexts/auth-context";
 import RecipeDetail from "../components/recipe-detail/recipe-detail";
