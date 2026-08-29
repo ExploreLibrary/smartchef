@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getMealsByCategory } from "../../services/api-service";
-
+import { Link } from "react-router-dom";
 
 function Gallery({ category }) {
 
@@ -32,6 +32,7 @@ function Gallery({ category }) {
           <img src={meal.mealThumb} alt={meal.mealName} />
           <h4>{meal.mealName}</h4>
           {meal.country && <p>{meal.country}</p>}
+          <Link to={`/recipes/${meal.externalId}`}>Ver receta</Link>
         </article>
       ))}
     </div>

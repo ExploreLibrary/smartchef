@@ -1,6 +1,6 @@
 import { useState, useContext, createContext, useEffect } from "react";
 import * as api from "../services/api-service";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 // Clave usada para guardar y leer el usuario en localStorage
 export const LS_USER_KEY = "current-user";
