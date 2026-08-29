@@ -22,7 +22,7 @@ function LoginForm() {
       console.log("Submitting login form...", data);
       await login(data);
       console.log("Login form submitted successfully.", data);
-      navigate("/home");
+      navigate("/");
     } catch (error) {
 
       console.error("Error submitting login form:", error);
