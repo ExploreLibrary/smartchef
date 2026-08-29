@@ -6,6 +6,7 @@ function RecipeDetailPage() {
   const { user } = useAuth();
   return (
     <PageLayout>
+    <div className="main-content main-content--home">
       <h1 className="welcome">{(user) ? `Welcome to SmartChef, ${user.name}`: `Welcome to SmartChef` }</h1>
       
       <div>
@@ -27,7 +28,7 @@ function RecipeDetailPage() {
         <h3 className="home-category-title"> Discover Delicious  dessert Recipes </h3>
         <Gallery category="Dessert" />
       </div>
-
+    </div>
     </PageLayout>
   );
 }
