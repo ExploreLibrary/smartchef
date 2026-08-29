@@ -2,7 +2,9 @@ import { Routes, Route } from "react-router";
 import {
   LoginPage,
   HomePage,
-  RegisterPage
+  RegisterPage,
+  RecipeDetailPage
+
 } from "./pages";
 
 function App() {
@@ -12,6 +14,7 @@ function App() {
         <Route path="/login" element={<LoginPage />}/>
         <Route path="/home" element={<HomePage />}/>
         <Route path="/register" element={<RegisterPage />}/>
+        <Route path="/recipe/:mealId" element={<RecipeDetailPage />}/>
       </Routes>
     </>
   );
