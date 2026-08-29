@@ -6,24 +6,27 @@ function RecipeDetailPage() {
   const { user } = useAuth();
   return (
     <PageLayout>
-      <h1 className="welcome">Welcome to SmartChef</h1>
-
-      <h2> Hello, {user?.name || "there"}! </h2>
-
-      <h3> Discover Delicious  vegan Recipes </h3>
-      <Gallery category="Vegan" />
+      <h1 className="welcome">{(user) ? `Welcome to SmartChef, ${user.name}`: `Welcome to SmartChef` }</h1>
       
-      <h3> Discover Delicious  chicken Recipes </h3>
-      <Gallery category="Chicken" />
+      <div>
+        <h3 className="home-category-title"> Discover Delicious  vegan Recipes </h3>
+        <Gallery category="Vegan" />
+      </div>
       
-      <h3> Discover Delicious  seafood Recipes </h3>
-      <Gallery category="Seafood" />
+      <div>
+        <h3 className="home-category-title"> Discover Delicious  chicken Recipes </h3>
+        <Gallery category="Chicken" />
+      </div>
       
-      <h3> Discover Delicious  dessert Recipes </h3>
-      <Gallery category="Dessert" />
+      <div>
+        <h3 className="home-category-title"> Discover Delicious  seafood Recipes </h3>
+        <Gallery category="Seafood" />
+      </div>
       
-      <h3> Favorite Recipes </h3>
-
+      <div>
+        <h3 className="home-category-title"> Discover Delicious  dessert Recipes </h3>
+        <Gallery category="Dessert" />
+      </div>
 
     </PageLayout>
   );

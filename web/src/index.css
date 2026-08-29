@@ -8,7 +8,7 @@
 
 html {
   color: #fefefe;
-  background-color: #000000;
+  background-color: #181818;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  background-color: #111111;
+  background-color: #000000;
   padding: 0 20px;
   min-height: 100vh;
 }
@@ -29,8 +29,10 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  gap: 40px;
+  gap: 70px;
   width: 100%;
+  justify-content: space-evenly;
+  padding-bottom: 70px;
 }
 
 .navbar {
@@ -61,6 +63,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 20px;
   font-size: 2rem;
   color: #fefefe;
+}
+
+.home-category-title {
+  margin-bottom: 40px;
 }
 
 .login-form {
@@ -114,10 +120,34 @@ h1, h2, h3, h4, h5, h6 {
 
 .gallery__meal {
   flex: calc(20% - 15px);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.gallery__meal h4 {
+  line-height: 1.35;
 }
 
 .gallery__meal img {
   width: 100%;
   height: auto;
   border-radius: 8px;
+}
+
+.gallery__meal-link {
+  background-color: rgba(255, 255, 255, 0.75);
+  color: #000;
+  text-decoration: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  text-align: center;
+  display: inline-flex;
+  align-self: flex-start;
+}
+
+.gallery__meal-link:hover {
+  background-color: rgba(255, 255, 255, 1);
 }
