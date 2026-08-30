@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../../services/api-service";
+import { useAuth } from "../../../contexts/auth-context";
 
 // LoginForm recibe onSubmit desde LoginPage.
 // react-hook-form gestiona el estado de los campos y la validación de forma declarativa.
 // No necesitamos useState por cada campo — register conecta el input al formulario.
 function LoginForm() {
   const navigate = useNavigate();
+  const { login: setAuthUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -19,9 +21,9 @@ function LoginForm() {
   // en el campo correspondiente sin desmontar el formulario.
   const handleFormSubmit = async (data) => {
     try {
-      console.log("Submitting login form...", data);
-      await login(data);
-      console.log("Login form submitted successfully.", data);
+      const response = await login(data);
+      const loggedUser = response?.user ?? response;
+      setAuthUser(loggedUser);
       navigate("/");
     } catch (error) {
 

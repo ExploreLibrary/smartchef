@@ -30,7 +30,7 @@ export function AuthContextProvider({ children }) {
     }
 
     fetchProfile();
-  }, []);
+  }, [navigate]);
 
   const login = (user) => {
     setUser(user);
@@ -38,8 +38,15 @@ export function AuthContextProvider({ children }) {
 
   // logout elimina el usuario del estado y de localStorage.
   // La cookie de sesión la elimina el servidor al llamar a DELETE /sessions.
-  const logout = () => {
-    setUser(undefined);
+  const logout = async () => {
+    try {
+      await api.logout();
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      setUser(null);
+      navigate("/login");
+    }
   };
 
   if (loading) {

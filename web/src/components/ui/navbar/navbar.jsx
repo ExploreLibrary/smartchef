@@ -1,8 +1,10 @@
 import Logo from "../../../assets/smartchef-logo.png";
-import MenuHamburgerIcon from "../../../assets/menu-hamburger.svg";
+import { useAuth } from "../../../contexts/auth-context";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+
+  const { user, logout } = useAuth();
 
   return (
     <div className="navbar">
@@ -18,8 +20,22 @@ function Navbar() {
         </ul>
       </div>
       <div className="navbar__secondary">
-        <Link className="navbar__secondary-link" to="/login">Login</Link>
-        <Link className="navbar__secondary-link navbar__secondary-link--register" to="/register">Register</Link>
+        {user ? (
+           <div>
+             <span className="navbar__user-name">{user.name} · </span>
+             <button
+                className="navbar__login-logout-btn"
+                onClick={logout}
+              >
+                Logout
+              </button>
+            </div>  
+        ) : (
+          <Link className="navbar__secondary-link" to="/login">Login</Link>
+        )}
+        {!user && (
+          <Link className="navbar__secondary-link navbar__secondary-link--register" to="/register">Register</Link>
+        )}
       </div>
     </div>
   );
