@@ -20,17 +20,22 @@ function Navbar() {
         </ul>
       </div>
       <div className="navbar__secondary">
-        {user?(
-            <button
+        {user ? (
+           <div>
+             <span className="navbar__user-name">{user.name} · </span>
+             <button
                 className="navbar__login-logout-btn"
-                onClick={() => logout()}
+                onClick={logout}
               >
                 Logout
               </button>
+            </div>  
         ) : (
           <Link className="navbar__secondary-link" to="/login">Login</Link>
         )}
-        <Link className="navbar__secondary-link navbar__secondary-link--register" to="/register">Register</Link>
+        {!user && (
+          <Link className="navbar__secondary-link navbar__secondary-link--register" to="/register">Register</Link>
+        )}
       </div>
     </div>
   );
