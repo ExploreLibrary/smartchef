@@ -5,9 +5,7 @@ function PageLayout({ children }) {
   return (
     <div className="container">
         <Navbar />
-        <div className="main-content">
-            {children}
-        </div>
+        {children}
     </div>
   );
 }

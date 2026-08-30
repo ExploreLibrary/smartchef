@@ -2,16 +2,22 @@ function RecipeDetail({ recipeData }) {
   const recipe = recipeData ?? {};
 
   return (
-    <div>
-      <h2>Detalle de la receta</h2>
+    <div className="main-content main-content-recipe-detail">
+      <h2>Recipe: {recipe.strMeal ?? "Receta sin definir"}</h2>
       <p>Recipe ID: {recipe.idMeal ?? "N/A"}</p>
-      <p>Título: {recipe.strMeal ?? "Sin título"}</p>
-      <p>País: {recipe.strCountry ?? "País no especificado"}</p>
+      <div className="recipe-detail__image-outer-container">
       {recipe.strMealThumb && (
-        <img src={recipe.strMealThumb} alt={recipe.strMeal} style={{ maxWidth: "300px" }} />
-       )}
-       <h2>Instrucciones de la receta</h2>
-       <p>{recipe.strInstructions ?? "Instrucciones no disponibles"}</p>
+        
+          <div className="recipe-detail__image-container">
+            <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+          </div>
+      )}
+      </div>
+      <p>Country: {recipe.strCountry ?? "Country not specified"}</p>
+      <h2>Instructions</h2>
+      <p className="recipe-detail__instructions">
+        {recipe.strInstructions ?? "Instructions not available"}
+      </p>
     </div>
   );
 }
