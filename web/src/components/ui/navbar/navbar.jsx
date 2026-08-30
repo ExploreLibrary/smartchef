@@ -21,10 +21,10 @@ function Navbar() {
       </div>
       <div className="navbar__secondary">
         {user ? (
-           <div>
-             <span className="navbar__user-name">{user.name} · </span>
+           <div className="navbar__secondary--user-logged">
+             <span className="navbar__user-name">{user.name}</span>
              <button
-                className="navbar__login-logout-btn"
+                className="navbar__secondary-link--logout"
                 onClick={logout}
               >
                 Logout

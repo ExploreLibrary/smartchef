@@ -74,8 +74,30 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
 }
 
+.navbar__secondary--user-logged {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
 .navbar__secondary-link {
   color: #ffffff;
+}
+
+.navbar__secondary-link--logout {
+  background-color: rgba(255, 255, 255, 0.75);
+  color: #000000;
+  padding: 5px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+}
+
+.navbar__secondary-link--logout:hover {
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .navbar__secondary-link--register {
@@ -200,6 +222,124 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .login-form__submit-button:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.register-form__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: center;
+}
+
+.register-form__global-error {
+  background: rgba(255, 255, 255, 0.75);
+  color: #eb0c0c;
+  padding: 7px;
+  border-radius: 4px;
+}
+
+.register-form {
+  width: 410px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #222222;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.register-form__title {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+}
+
+.register-form__body {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.register-form__field {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+}
+
+.register-form__field input {
+  height: 30px;
+  background-color: #eee;
+  border: 1px solid #444444;
+  border-radius: 4px;
+  padding: 20px 10px;
+  line-height: 1.5;
+  min-width: 300px;
+}
+
+.register-form__name-error {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.75);
+  color: #eb0c0c;
+  padding: 7px;
+  transform: translateX(calc(100% - 40px));
+  border-radius: 4px;
+}
+
+.register-form__username-error {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.75);
+  color: #eb0c0c;
+  padding: 7px;
+  transform: translateX(calc(100% - 40px));
+  border-radius: 4px;
+}
+
+.register-form__email-error {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.75);
+  color: #eb0c0c;
+  padding: 7px;
+  transform: translateX(calc(100% - 40px));
+  border-radius: 4px;
+}
+
+.register-form__password-error {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.75);
+  color: #eb0c0c;
+  padding: 7px;
+  transform: translateX(calc(100% - 40px));
+  border-radius: 4px;
+}
+
+.register-form__footer {
+  display: flex;
+}
+
+.register-form__submit-button {
+  background-color: rgba(255, 255, 255, 0.75);
+  color: #000000;
+  padding: 6px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+}
+
+.register-form__submit-button:hover {
   background-color: rgba(255, 255, 255, 1);
 }
 
