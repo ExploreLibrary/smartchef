@@ -8,7 +8,7 @@ function FavoritesPage() {
     <PageLayout>
     <div className="main-content main-content--home">
       <div>
-        <h1 className="home-category-title"> My Favorite Recipes </h1>
+        <h1 className="favorite-recipes-title"> My Favorite Recipes </h1>
         <FavoritesGallery />
 
       </div>

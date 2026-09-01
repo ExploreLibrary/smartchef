@@ -8,7 +8,7 @@
 
 html {
   color: #fefefe;
-  background-color: #181818;
+  background-color: #000000;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -18,10 +18,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   background-color: #000000;
-  padding: 0 20px;
+  padding: 20px 50px;
   min-height: 100vh;
 }
 
@@ -131,6 +131,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .home-category-title {
   margin-bottom: 40px;
+  font-size: 1.5rem;
 }
 
 .login-form__container {
@@ -349,8 +350,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .gallery {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 50px 50px; 
   width: 100%;
+  justify-content: space-between;
 }
 
 .gallery--empty {
@@ -366,11 +369,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .gallery__meal {
-  flex: calc(20% - 15px);
+  flex: 0 0 calc(19% - 30px);
   display: flex;
   flex-direction: column;
-  width: 100%;
-  gap: 10px;
+  width: auto;
+  gap: 20px;
   justify-content: space-between;
 }
 
@@ -469,4 +472,10 @@ h1, h2, h3, h4, h5, h6 {
 .recipe-detail__instructions {
   line-height: 1.35;
   width: 900px;
+}
+
+.favorite-recipes-title {
+  margin-bottom: 40px;
+  margin-top: 40px;
+  font-size: 1.5rem;
 }
