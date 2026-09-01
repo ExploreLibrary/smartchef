@@ -47,6 +47,11 @@ export const createComment = (postId, data) =>
 export const deleteComment = (postId, commentId) =>
   http.delete(`/posts/${postId}/comments/${commentId}`);
 
+// --- Favorites ---
+export const listFavorites = () => http.get("/favorites");
+export const createFavorite = (data) => http.post("/favorites", data);
+export const deleteFavorite = (favoriteId) => http.delete(`/favorites/${favoriteId}`);
+
 // ---  Recipes ---
 export const searchRecipes = (q) => http.get(`/recipes/search?q=${q}`);
 export const getRecipeDetail = (mealId) => http.get(`/recipes/${mealId}`);

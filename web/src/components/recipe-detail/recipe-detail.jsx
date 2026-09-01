@@ -11,7 +11,11 @@ function RecipeDetail({ recipeData }) {
           <p>Recipe ID: {recipe.idMeal ?? "N/A"}</p>
         </div>
         <div className="recipe-detail__header-actions">
-          <FavoriteButton recipeId={recipe.idMeal} />
+          <FavoriteButton
+            recipeId={recipe.idMeal}
+            recipeName={recipe.strMeal}
+            recipeThumb={recipe.strMealThumb}
+          />
         </div>
       </div>
       <div className="recipe-detail__image-outer-container">
