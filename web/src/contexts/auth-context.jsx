@@ -36,6 +36,16 @@ export function AuthContextProvider({ children }) {
     setUser(user);
   };
 
+  const updateFavorites = (updatedUser) => {
+    setUser((currentUser) => ({
+      ...currentUser,
+      ...updatedUser,
+      favorites: Array.isArray(updatedUser?.favorites)
+        ? updatedUser.favorites
+        : currentUser?.favorites ?? [],
+    }));
+  };
+
   // logout elimina el usuario del estado y de localStorage.
   // La cookie de sesión la elimina el servidor al llamar a DELETE /sessions.
   const logout = async () => {
@@ -54,7 +64,7 @@ export function AuthContextProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, updateFavorites }}>
       {children}
     </AuthContext.Provider>
   );

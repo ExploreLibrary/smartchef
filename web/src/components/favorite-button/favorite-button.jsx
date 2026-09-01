@@ -1,9 +1,8 @@
-import { useAuth } from "../../context/auth-context";
+import { useAuth } from "../../contexts/auth-context";
 import { useEffect, useState } from "react";
 
 function FavoriteButton({ recipeId }) {
-    const [isFavorite, setIsFavorite] = useState(false);
-
+  const [isFavorite, setIsFavorite] = useState(false);
   const { user, updateFavorites } = useAuth();
 
   useEffect(() => {
@@ -12,7 +11,7 @@ function FavoriteButton({ recipeId }) {
     }
   }, [user?.favorites, recipeId]);
 
-    const handleToggleRecipeFavorite = function() {
+  const handleToggleRecipeFavorite = function () {
     if (!user) return;
 
     const currentFavorites = Array.isArray(user.favorites) ? user.favorites : [];
@@ -23,18 +22,22 @@ function FavoriteButton({ recipeId }) {
 
     const updatedUser = {
       ...user,
-      favorites: nextFavorites
+      favorites: nextFavorites,
     };
 
     setIsFavorite(!alreadyFavorite);
     updateFavorites(updatedUser);
-  }
-
+  };
 
   return (
     <button className="favorite-button" onClick={handleToggleRecipeFavorite}>
+      {(isFavorite ) && <>
+      <span className="favorite-button__text">Remove from Favorites</span>
+      </>}  
+      {(!isFavorite ) && <>
       <span className="favorite-button__icon">❤️</span>
       <span className="favorite-button__text">Add to Favorites</span>
+      </>}
     </button>
   );
 }
