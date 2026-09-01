@@ -3,7 +3,8 @@ import {
   LoginPage,
   HomePage,
   RegisterPage,
-  RecipeDetailPage
+  RecipeDetailPage,
+  FavoritesPage
 
 } from "./pages";
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<HomePage />}/>
         <Route path="/register" element={<RegisterPage />}/>
         <Route path="/recipes/:mealId" element={<RecipeDetailPage />}/>
+        <Route path="/my-favorite-recipes" element={<FavoritesPage />}/>
       </Routes>
     </>
   );
