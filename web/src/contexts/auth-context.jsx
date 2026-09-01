@@ -2,24 +2,110 @@ import { useState, useContext, createContext, useEffect } from "react";
 import * as api from "../services/api-service";
 import { useNavigate } from "react-router-dom";
 
-// Clave usada para guardar y leer el usuario en localStorage
 export const LS_USER_KEY = "current-user";
 
-// Creamos el contexto vacío — su valor real lo provee AuthContextProvider
+const normalizeFavorites = (favorites = []) => {
+  if (!Array.isArray(favorites)) return [];
+
+  return [...new Set(
+    favorites
+      .map((favorite) => {
+        if (typeof favorite === "string" || typeof favorite === "number") {
+          return String(favorite);
+        }
+
+        if (favorite && typeof favorite === "object") {
+          return String(favorite.mealId ?? favorite.id ?? favorite._id ?? "");
+        }
+
+        return "";
+      })
+      .filter(Boolean)
+  )];
+};
+
+const persistUser = (user) => {
+  if (typeof window === "undefined") return;
+
+  if (!user) {
+    localStorage.removeItem(LS_USER_KEY);
+    return;
+  }
+
+  const userToStore = {
+    ...user,
+    favorites: normalizeFavorites(user?.favorites ?? []),
+  };
+
+  localStorage.setItem(LS_USER_KEY, JSON.stringify(userToStore));
+};
+
+const readStoredUser = () => {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const rawUser = localStorage.getItem(LS_USER_KEY);
+    if (!rawUser) return null;
+
+    const parsedUser = JSON.parse(rawUser);
+    return {
+      ...parsedUser,
+      favorites: normalizeFavorites(parsedUser?.favorites ?? []),
+    };
+  } catch {
+    return null;
+  }
+};
+
 const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => readStoredUser());
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const syncFavorites = async () => {
+    try {
+      const favoriteRecipes = await api.listFavorites();
+      const nextFavorites = normalizeFavorites(
+        favoriteRecipes.map((favorite) => favorite.mealId)
+      );
+
+      setUser((currentUser) => {
+        if (!currentUser) return currentUser;
+
+        const nextUser = {
+          ...currentUser,
+          favorites: nextFavorites,
+        };
+
+        persistUser(nextUser);
+        return nextUser;
+      });
+
+      return nextFavorites;
+    } catch (error) {
+      console.error("Error loading favorites:", error);
+      return [];
+    }
+  };
 
   useEffect(() => {
     async function fetchProfile() {
       try {
-        const user = await api.getProfile();
-        setUser(user);
+        const profileUser = await api.getProfile();
+        const favoriteRecipes = await api.listFavorites().catch(() => []);
+
+        const mergedUser = {
+          ...profileUser,
+          favorites: normalizeFavorites(
+            favoriteRecipes.map((favorite) => favorite.mealId)
+          ),
+        };
+
+        setUser(mergedUser);
+        persistUser(mergedUser);
       } catch (err) {
-        // Don't force navigation if the user is already visiting a public route
         const pathname = typeof window !== "undefined" ? window.location.pathname : "";
         if (pathname !== "/login" && pathname !== "/register") {
           navigate("/login");
@@ -32,12 +118,30 @@ export function AuthContextProvider({ children }) {
     fetchProfile();
   }, [navigate]);
 
-  const login = (user) => {
-    setUser(user);
+  const login = (userData) => {
+    const nextUser = {
+      ...userData,
+      favorites: normalizeFavorites(userData?.favorites ?? []),
+    };
+
+    setUser(nextUser);
+    persistUser(nextUser);
   };
 
-  // logout elimina el usuario del estado y de localStorage.
-  // La cookie de sesión la elimina el servidor al llamar a DELETE /sessions.
+  const updateFavorites = (updatedUser) => {
+    const nextUser = {
+      ...updatedUser,
+      favorites: normalizeFavorites(updatedUser?.favorites ?? []),
+    };
+
+    setUser((currentUser) => ({
+      ...currentUser,
+      ...nextUser,
+      favorites: nextUser.favorites,
+    }));
+    persistUser(nextUser);
+  };
+
   const logout = async () => {
     try {
       await api.logout();
@@ -45,6 +149,7 @@ export function AuthContextProvider({ children }) {
       console.error("Logout error:", error);
     } finally {
       setUser(null);
+      persistUser(null);
       navigate("/login");
     }
   };
@@ -54,7 +159,7 @@ export function AuthContextProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, updateFavorites, syncFavorites }}>
       {children}
     </AuthContext.Provider>
   );

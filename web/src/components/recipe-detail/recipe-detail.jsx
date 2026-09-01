@@ -1,10 +1,23 @@
+import FavoriteButton from "../favorite-button/favorite-button";
+
 function RecipeDetail({ recipeData }) {
   const recipe = recipeData ?? {};
 
   return (
     <div className="main-content main-content-recipe-detail">
-      <h2>Recipe: {recipe.strMeal ?? "Receta sin definir"}</h2>
-      <p>Recipe ID: {recipe.idMeal ?? "N/A"}</p>
+      <div className="recipe-detail__header">
+        <div className="recipe-detail__header-info">
+          <h2>Recipe: {recipe.strMeal ?? "Receta sin definir"}</h2>
+          <p>Recipe ID: {recipe.idMeal ?? "N/A"}</p>
+        </div>
+        <div className="recipe-detail__header-actions">
+          <FavoriteButton
+            recipeId={recipe.idMeal}
+            recipeName={recipe.strMeal}
+            recipeThumb={recipe.strMealThumb}
+          />
+        </div>
+      </div>
       <div className="recipe-detail__image-outer-container">
       {recipe.strMealThumb && (
         
