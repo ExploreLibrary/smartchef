@@ -1,7 +1,7 @@
 import PantryItem from "./pantry-item";
 import PantryForm from "./pantry-form";
 
-function PantryList({ pantryData }) {
+function PantryList({ pantryData, onItemCreated }) {
   const items = Array.isArray(pantryData) ? pantryData : [];
 
   return (
@@ -19,7 +19,7 @@ function PantryList({ pantryData }) {
         </div>
 
         <div className="pantry-form-container">
-            <PantryForm />    
+          <PantryForm onItemCreated={onItemCreated} />
         </div>
     </div>
   );

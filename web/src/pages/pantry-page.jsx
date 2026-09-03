@@ -10,6 +10,10 @@ function PantryPage() {
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
+  const handleItemCreated = (newItem) => {
+    setPantry((currentPantry) => [...currentPantry, newItem]);
+  };
+
   const fetchPantry = async () => {
     try {
       const response = await getPantry();
@@ -32,7 +36,10 @@ function PantryPage() {
       {isError && <p>No se pudo cargar la receta.</p>}
       {!loading && !isError && (
         <>
-          <PantryList pantryData={pantry} />
+          <PantryList
+            pantryData={pantry}
+            onItemCreated={handleItemCreated}
+          />
         </>
       )}
     </PageLayout>
