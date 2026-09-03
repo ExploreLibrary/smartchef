@@ -3,12 +3,10 @@ const PantryItem = require("../lib/models/pantryItem.model");
 
 const search = async (req, res, next) => {
   try {
-    const {
-      q = "",
-      category = "",
-      country = "",
-      ingredient = ""
-    } = req.query;
+    const q = (req.query.q || "").trim();
+    const category = (req.query.category || "").trim();
+    const country = (req.query.country || "").trim();
+    const ingredient = (req.query.ingredient || "").trim();
 
     let meals = [];
 

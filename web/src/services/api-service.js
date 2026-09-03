@@ -60,21 +60,25 @@ export const searchRecipes = ({
   ingredient = "",
 }) => {
   const params = new URLSearchParams();
+  const normalizedQuery = q.trim();
+  const normalizedCategory = category.trim();
+  const normalizedCountry = country.trim();
+  const normalizedIngredient = ingredient.trim();
 
-  if (q) {
-    params.append("q", q);
+  if (normalizedQuery) {
+    params.append("q", normalizedQuery);
   }
 
-  if (category) {
-    params.append("category", category);
+  if (normalizedCategory) {
+    params.append("category", normalizedCategory);
   }
 
-  if (country) {
-    params.append("country", country);
+  if (normalizedCountry) {
+    params.append("country", normalizedCountry);
   }
 
-  if (ingredient) {
-    params.append("ingredient", ingredient);
+  if (normalizedIngredient) {
+    params.append("ingredient", normalizedIngredient);
   }
 
   return http.get(`/recipes/search?${params.toString()}`);
