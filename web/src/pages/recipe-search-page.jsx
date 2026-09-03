@@ -4,17 +4,13 @@ import { searchRecipes } from "../services/api-service";
 import { Link } from "react-router-dom";
 
 const countryLabels = {
-  American: "United States",
   British: "United Kingdom",
   Canadian: "Canada",
   Chinese: "China",
   Croatian: "Croatia",
-  Dutch: "Netherlands",
   Egyptian: "Egypt",
   Filipino: "Philippines",
-  French: "France",
   Greek: "Greece",
-  Indian: "India",
   Irish: "Ireland",
   Italian: "Italy",
   Jamaican: "Jamaica",
