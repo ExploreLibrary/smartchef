@@ -556,3 +556,31 @@ h1, h2, h3, h4, h5, h6 {
 .recipe-search-results h2 {
   margin-bottom: 40px;
 }
+
+.pantry-list-container {
+  width: 100%;
+  display: flex;
+}
+
+.pantry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 0 0 calc(50% - 20px);
+}
+
+.pantry-item {
+  background-color: #222222;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.pantry-form {
+  background-color: #222222;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid #ffffff;
+}

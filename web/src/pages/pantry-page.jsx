@@ -1,6 +1,7 @@
 
 import { PageLayout } from "../layouts";
 import PantryList from "../components/pantry/pantry-list";
+import PantryForm from "../components/pantry/pantry-form";
 import { useState, useEffect } from "react";
 import { getPantry } from "../services/api-service";
 
@@ -9,18 +10,19 @@ function PantryPage() {
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    async function fetchPantry() {
-      try {
-        const response = await getPantry();
-        setPantry(response);
-      } catch {
-        setIsError(true);
-      } finally {
-        setLoading(false);
-      }
+  const fetchPantry = async () => {
+    try {
+      const response = await getPantry();
+      setPantry(response);
+      setIsError(false);
+    } catch {
+      setIsError(true);
+    } finally {
+      setLoading(false);
     }
+  };
 
+  useEffect(() => {
     fetchPantry();
   }, []);
 
@@ -28,7 +30,11 @@ function PantryPage() {
     <PageLayout>
       {loading && <p>Cargando receta...</p>}
       {isError && <p>No se pudo cargar la receta.</p>}
-      {!loading && !isError && <PantryList pantryData={pantry} />}
+      {!loading && !isError && (
+        <>
+          <PantryList pantryData={pantry} />
+        </>
+      )}
     </PageLayout>
   );
 }
