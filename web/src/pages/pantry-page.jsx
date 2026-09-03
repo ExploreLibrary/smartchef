@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { getPantry } from "../services/api-service";
 
 function PantryPage() {
-  const [pantry, setPantry] = useState({});
+  const [pantry, setPantry] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 

@@ -1,12 +1,13 @@
 import PantryItem from "./pantry-item";
 
 function PantryList({ pantryData }) {
+  const items = Array.isArray(pantryData) ? pantryData : [];
 
   return (
     <div className="pantry-list">
-        {pantryData.items && pantryData.items.length > 0 ? (
+        {items.length > 0 ? (
           <ul>
-            {pantryData.items.map((item) => (
+            {items.map((item) => (
               <li key={item.id}> <PantryItem item={item} /></li>
             ))}
           </ul>
