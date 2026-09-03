@@ -53,7 +53,32 @@ export const createFavorite = (data) => http.post("/favorites", data);
 export const deleteFavorite = (favoriteId) => http.delete(`/favorites/${favoriteId}`);
 
 // ---  Recipes ---
-export const searchRecipes = (q) => http.get(`/recipes/search?q=${q}`);
+export const searchRecipes = ({
+  q = "",
+  category = "",
+  country = "",
+  ingredient = "",
+}) => {
+  const params = new URLSearchParams();
+
+  if (q) {
+    params.append("q", q);
+  }
+
+  if (category) {
+    params.append("category", category);
+  }
+
+  if (country) {
+    params.append("country", country);
+  }
+
+  if (ingredient) {
+    params.append("ingredient", ingredient);
+  }
+
+  return http.get(`/recipes/search?${params.toString()}`);
+};
 export const getRecipeDetail = (mealId) => http.get(`/recipes/${mealId}`);
 
 // --- Meal Categories ---
