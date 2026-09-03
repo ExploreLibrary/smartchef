@@ -3,6 +3,36 @@ import { PageLayout } from "../layouts";
 import { searchRecipes } from "../services/api-service";
 import { Link } from "react-router-dom";
 
+const countryLabels = {
+  British: "United Kingdom",
+  Canadian: "Canada",
+  Chinese: "China",
+  Croatian: "Croatia",
+  Egyptian: "Egypt",
+  Filipino: "Philippines",
+  Greek: "Greece",
+  Irish: "Ireland",
+  Italian: "Italy",
+  Jamaican: "Jamaica",
+  Japanese: "Japan",
+  Kenyan: "Kenya",
+  Malaysian: "Malaysia",
+  Mexican: "Mexico",
+  Moroccan: "Morocco",
+  Polish: "Poland",
+  Portuguese: "Portugal",
+  Russian: "Russia",
+  Spanish: "Spain",
+  Thai: "Thailand",
+  Tunisian: "Tunisia",
+  Turkish: "Turkey",
+  Ukrainian: "Ukraine",
+  Uruguayan: "Uruguay",
+  Vietnamese: "Vietnam",
+};
+
+const countryOptions = Object.entries(countryLabels);
+
 function RecipeSearchPage() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
@@ -126,24 +156,11 @@ function RecipeSearchPage() {
               }
             >
               <option value="">All countries</option>
-              <option value="American">American</option>
-              <option value="British">British</option>
-              <option value="Canadian">Canadian</option>
-              <option value="Chinese">Chinese</option>
-              <option value="Dutch">Dutch</option>
-              <option value="Egyptian">Egyptian</option>
-              <option value="French">French</option>
-              <option value="Greek">Greek</option>
-              <option value="Indian">India</option>
-              <option value="Italian">Italian</option>
-              <option value="Japanese">Japanese</option>
-              <option value="Mexican">Mexican</option>
-              <option value="Spanish">Spanish</option>
-              <option value="Thai">Thai</option>
-              <option value="Turkish">Turkish</option>
-              <option value="Vietnamese">
-                Vietnamese
-              </option>
+              {countryOptions.map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
             </select>
           </div>
 

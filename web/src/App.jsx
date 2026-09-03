@@ -5,7 +5,8 @@ import {
   RegisterPage,
   RecipeDetailPage,
   FavoritesPage,
-  RecipeSearchPage
+  RecipeSearchPage,
+  PantryPage
 
 } from "./pages";
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/recipes/:mealId" element={<RecipeDetailPage />}/>
         <Route path="/my-favorite-recipes" element={<FavoritesPage />}/>
         <Route path="/recipe-search" element={<RecipeSearchPage />} />
+        <Route path="/my-pantry" element={<PantryPage />} />
       </Routes>
     </>
   );
