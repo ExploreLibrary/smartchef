@@ -84,3 +84,10 @@ export const getRecipeDetail = (mealId) => http.get(`/recipes/${mealId}`);
 // --- Meal Categories ---
 export const getMealsByCategory = (category) => 
   http.get(`/meal-categories/${category}`);
+
+// --- Pantry ---
+export const getPantry = () => http.get("/pantry");
+export const createPantryItem = (data) => http.post("/pantry", data);
+export const getPantryItemDetail = (id) => http.get(`/pantry/${id}`);
+export const updatePantryItem = (id, data) => http.patch(`/pantry/${id}`, data);
+export const deletePantryItem = (id) => http.delete(`/pantry/${id}`);
