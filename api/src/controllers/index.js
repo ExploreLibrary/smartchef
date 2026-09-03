@@ -24,7 +24,6 @@ router.post("/favorites", auth, favoritesController.create);
 router.get("/favorites/:id", auth, favoritesController.detail);
 router.delete("/favorites/:id", auth, favoritesController.deleteItem);
 
-router.get("/recipes/areas", recipesController.areas);
 router.get("/recipes/search", recipesController.search);
 router.get("/recipes/:mealId/check-pantry", auth, recipesController.checkPantry);
 router.get("/recipes/:mealId", recipesController.detail);

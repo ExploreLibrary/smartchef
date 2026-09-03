@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PageLayout } from "../layouts";
-import { getRecipeAreas, searchRecipes } from "../services/api-service";
+import { searchRecipes } from "../services/api-service";
 import { Link } from "react-router-dom";
 
 const countryLabels = {
@@ -35,26 +35,13 @@ const countryLabels = {
   Vietnamese: "Vietnam",
 };
 
-const fallbackAreas = Object.keys(countryLabels);
-
-const toCountryOptions = (areas) => areas
-  .filter((area) => countryLabels[area])
-  .map((area) => [area, countryLabels[area]]);
+const countryOptions = Object.entries(countryLabels);
 
 function RecipeSearchPage() {
-  const [countryOptions, setCountryOptions] = useState(
-    toCountryOptions(fallbackAreas)
-  );
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
   const [country, setCountry] = useState("");
   const [ingredient, setIngredient] = useState("");
-
-  useEffect(() => {
-    getRecipeAreas()
-      .then((response) => setCountryOptions(toCountryOptions(response.areas ?? [])))
-      .catch((error) => console.error("Error loading recipe countries:", error));
-  }, []);
 
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);

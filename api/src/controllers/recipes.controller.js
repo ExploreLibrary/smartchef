@@ -1,20 +1,6 @@
 const axios = require("axios");
 const PantryItem = require("../lib/models/pantryItem.model");
 
-const areas = async (req, res, next) => {
-  try {
-    const response = await axios.get(
-      "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
-    );
-
-    res.json({
-      areas: response.data.meals?.map((meal) => meal.strArea) ?? []
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
 const search = async (req, res, next) => {
   try {
     const q = (req.query.q || "").trim();
@@ -210,7 +196,6 @@ const checkPantry = async (req, res, next) => {
 };
 
 module.exports = {
-  areas,
   search,
   detail,
   checkPantry
