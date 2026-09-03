@@ -14,6 +14,12 @@ function PantryPage() {
     setPantry((currentPantry) => [...currentPantry, newItem]);
   };
 
+  const handleItemDeleted = (deletedItemId) => {
+    setPantry((currentPantry) =>
+      currentPantry.filter((item) => item.id !== deletedItemId)
+    );
+  };
+
   const fetchPantry = async () => {
     try {
       const response = await getPantry();
@@ -39,6 +45,7 @@ function PantryPage() {
           <PantryList
             pantryData={pantry}
             onItemCreated={handleItemCreated}
+            onItemDeleted={handleItemDeleted}
           />
         </>
       )}

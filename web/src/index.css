@@ -573,6 +573,31 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #222222;
   padding: 20px;
   border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.pantry-item__delete-button {
+  background: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 5px 8px;
+}
+
+.pantry-item__delete-button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.pantry-item__delete-button:disabled {
+  cursor: wait;
+  opacity: 0.5;
 }
 
 .pantry-form {

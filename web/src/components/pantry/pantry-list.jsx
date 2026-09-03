@@ -1,7 +1,7 @@
 import PantryItem from "./pantry-item";
 import PantryForm from "./pantry-form";
 
-function PantryList({ pantryData, onItemCreated }) {
+function PantryList({ pantryData, onItemCreated, onItemDeleted }) {
   const items = Array.isArray(pantryData) ? pantryData : [];
 
   return (
@@ -10,7 +10,9 @@ function PantryList({ pantryData, onItemCreated }) {
             {items.length > 0 ? (
             <ul>
                 {items.map((item) => (
-                <li key={item.id}> <PantryItem item={item} /></li>
+                <li key={item.id}>
+                  <PantryItem item={item} onItemDeleted={onItemDeleted} />
+                </li>
                 ))}
             </ul>
             ) : (
