@@ -53,6 +53,7 @@ export const createFavorite = (data) => http.post("/favorites", data);
 export const deleteFavorite = (favoriteId) => http.delete(`/favorites/${favoriteId}`);
 
 // ---  Recipes ---
+export const getRecipeAreas = () => http.get("/recipes/areas");
 export const searchRecipes = ({
   q = "",
   category = "",

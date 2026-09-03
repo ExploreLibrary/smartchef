@@ -1,13 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PageLayout } from "../layouts";
-import { searchRecipes } from "../services/api-service";
+import { getRecipeAreas, searchRecipes } from "../services/api-service";
 import { Link } from "react-router-dom";
 
+const countryLabels = {
+  American: "United States",
+  British: "United Kingdom",
+  Canadian: "Canada",
+  Chinese: "China",
+  Croatian: "Croatia",
+  Dutch: "Netherlands",
+  Egyptian: "Egypt",
+  Filipino: "Philippines",
+  French: "France",
+  Greek: "Greece",
+  Indian: "India",
+  Irish: "Ireland",
+  Italian: "Italy",
+  Jamaican: "Jamaica",
+  Japanese: "Japan",
+  Kenyan: "Kenya",
+  Malaysian: "Malaysia",
+  Mexican: "Mexico",
+  Moroccan: "Morocco",
+  Polish: "Poland",
+  Portuguese: "Portugal",
+  Russian: "Russia",
+  Spanish: "Spain",
+  Thai: "Thailand",
+  Tunisian: "Tunisia",
+  Turkish: "Turkey",
+  Ukrainian: "Ukraine",
+  Uruguayan: "Uruguay",
+  Vietnamese: "Vietnam",
+};
+
+const fallbackAreas = Object.keys(countryLabels);
+
+const toCountryOptions = (areas) => areas
+  .filter((area) => countryLabels[area])
+  .map((area) => [area, countryLabels[area]]);
+
 function RecipeSearchPage() {
+  const [countryOptions, setCountryOptions] = useState(
+    toCountryOptions(fallbackAreas)
+  );
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
   const [country, setCountry] = useState("");
   const [ingredient, setIngredient] = useState("");
+
+  useEffect(() => {
+    getRecipeAreas()
+      .then((response) => setCountryOptions(toCountryOptions(response.areas ?? [])))
+      .catch((error) => console.error("Error loading recipe countries:", error));
+  }, []);
 
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -126,24 +173,11 @@ function RecipeSearchPage() {
               }
             >
               <option value="">All countries</option>
-              <option value="American">American</option>
-              <option value="British">British</option>
-              <option value="Canadian">Canadian</option>
-              <option value="Chinese">Chinese</option>
-              <option value="Dutch">Dutch</option>
-              <option value="Egyptian">Egyptian</option>
-              <option value="French">French</option>
-              <option value="Greek">Greek</option>
-              <option value="Indian">India</option>
-              <option value="Italian">Italian</option>
-              <option value="Japanese">Japanese</option>
-              <option value="Mexican">Mexican</option>
-              <option value="Spanish">Spanish</option>
-              <option value="Thai">Thai</option>
-              <option value="Turkish">Turkish</option>
-              <option value="Vietnamese">
-                Vietnamese
-              </option>
+              {countryOptions.map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
             </select>
           </div>
 
