@@ -93,6 +93,9 @@ export const checkPantry = (mealId) =>
 export const listRatings = (mealId) =>
   http.get(`/ratings/${mealId}`);
 
+export const createRating = (data) =>
+  http.post("/ratings", data);
+
 // --- Meal Categories ---
 export const getMealsByCategory = (category) => 
   http.get(`/meal-categories/${category}`);

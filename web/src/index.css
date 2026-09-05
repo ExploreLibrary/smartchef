@@ -39,6 +39,50 @@ h1, h2, h3, h4, h5, h6 {
   gap: 20px;
 }
 
+.rating {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rating__title {
+  font-size: 1.25rem;
+}
+
+.rating__stars {
+  display: flex;
+  gap: 4px;
+}
+
+.rating__star {
+  padding: 0;
+  border: none;
+  color: #777777;
+  background: transparent;
+  cursor: pointer;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.rating__star:hover,
+.rating__star:focus-visible,
+.rating__star--selected {
+  color: #ffd166;
+}
+
+.rating__star:disabled {
+  cursor: wait;
+}
+
+.rating__feedback,
+.rating__error {
+  font-size: 0.9rem;
+}
+
+.rating__error {
+  color: #eb0c0c;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
