@@ -1,5 +1,6 @@
 import FavoriteButton from "../favorite-button/favorite-button";
 import Rating from "../rating/rating";
+import Comments from "../comments/comments";
 
 function RecipeDetail({ recipeData, onCheckPantry, pantryCheck, pantryLoading, pantryError }) {
   const recipe = recipeData ?? {};
@@ -121,6 +122,7 @@ function RecipeDetail({ recipeData, onCheckPantry, pantryCheck, pantryLoading, p
       )}
 
       <Rating mealId={recipe.idMeal} />
+      <Comments mealId={recipe.idMeal} />
 
       {/* CHECK PANTRY */}
       <section className="recipe-detail__pantry">
