@@ -1,6 +1,35 @@
 const axios = require("axios");
 const PantryItem = require("../lib/models/pantryItem.model");
 
+const getMealDetails = async (meals) => {
+  const detailedMeals = await Promise.all(
+    meals.map(async (meal) => {
+      const response = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`
+      );
+
+      return response.data.meals?.[0];
+    })
+  );
+
+  return detailedMeals.filter(Boolean);
+};
+
+const mealHasIngredient = (meal, ingredientSearch) => {
+  for (let i = 1; i <= 20; i++) {
+    const mealIngredient = meal[`strIngredient${i}`];
+
+    if (
+      mealIngredient &&
+      mealIngredient.trim().toLowerCase().includes(ingredientSearch)
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const search = async (req, res, next) => {
   try {
     const q = (req.query.q || "").trim();
@@ -47,27 +76,17 @@ const search = async (req, res, next) => {
     }
 
     // --------------------------------
-    // 2. Get full details when
-    //    multiple filters are used
+    // 2. Get full details when we need
+    //    to apply additional filters
     // --------------------------------
 
-    const hasMultipleFilters =
-      (q && (category || country || ingredient)) ||
-      (category && (country || ingredient)) ||
-      (country && ingredient);
+    const needsFullDetails =
+      ingredient ||
+      (q && (category || country)) ||
+      (category && country);
 
-    if (hasMultipleFilters) {
-      const detailedMeals = await Promise.all(
-        meals.map(async (meal) => {
-          const response = await axios.get(
-            `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`
-          );
-
-          return response.data.meals?.[0];
-        })
-      );
-
-      meals = detailedMeals.filter(Boolean);
+    if (needsFullDetails && meals.length > 0) {
+      meals = await getMealDetails(meals);
     }
 
     // --------------------------------
@@ -85,10 +104,10 @@ const search = async (req, res, next) => {
     // --------------------------------
 
     if (country) {
-    meals = meals.filter(
-      (meal) =>
-      meal.strArea === country ||
-      (country === "Indian" && meal.strArea === "India")
+      meals = meals.filter(
+        (meal) =>
+          meal.strArea === country ||
+          (country === "Indian" && meal.strArea === "India")
       );
     }
 
@@ -97,22 +116,11 @@ const search = async (req, res, next) => {
     // --------------------------------
 
     if (ingredient) {
-      const ingredientSearch = ingredient.trim().toLowerCase();
+      const ingredientSearch = ingredient.toLowerCase();
 
-      meals = meals.filter((meal) => {
-        for (let i = 1; i <= 20; i++) {
-          const mealIngredient = meal[`strIngredient${i}`];
-
-          if (
-            mealIngredient &&
-            mealIngredient.trim().toLowerCase().includes(ingredientSearch)
-          ) {
-            return true;
-          }
-        }
-
-        return false;
-      });
+      meals = meals.filter((meal) =>
+        mealHasIngredient(meal, ingredientSearch)
+      );
     }
 
     // --------------------------------
@@ -120,9 +128,8 @@ const search = async (req, res, next) => {
     // --------------------------------
 
     res.json({
-      meals
+      meals,
     });
-
   } catch (error) {
     next(error);
   }
@@ -157,7 +164,7 @@ const checkPantry = async (req, res, next) => {
     }
 
     const pantryItems = await PantryItem.find({
-      user: req.user._id
+      user: req.user._id,
     });
 
     const recipeIngredients = [];
@@ -188,7 +195,7 @@ const checkPantry = async (req, res, next) => {
       mealId: meal.idMeal,
       mealName: meal.strMeal,
       available,
-      missing
+      missing,
     });
   } catch (error) {
     next(error);
@@ -198,5 +205,5 @@ const checkPantry = async (req, res, next) => {
 module.exports = {
   search,
   detail,
-  checkPantry
+  checkPantry,
 };

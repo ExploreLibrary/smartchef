@@ -52,7 +52,7 @@ export const listFavorites = () => http.get("/favorites");
 export const createFavorite = (data) => http.post("/favorites", data);
 export const deleteFavorite = (favoriteId) => http.delete(`/favorites/${favoriteId}`);
 
-// ---  Recipes ---
+// --- Recipes ---
 export const searchRecipes = ({
   q = "",
   category = "",
@@ -83,7 +83,12 @@ export const searchRecipes = ({
 
   return http.get(`/recipes/search?${params.toString()}`);
 };
-export const getRecipeDetail = (mealId) => http.get(`/recipes/${mealId}`);
+
+export const getRecipeDetail = (mealId) =>
+  http.get(`/recipes/${mealId}`);
+
+export const checkPantry = (mealId) =>
+  http.get(`/recipes/${mealId}/check-pantry`);
 
 // --- Meal Categories ---
 export const getMealsByCategory = (category) => 
