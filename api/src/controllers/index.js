@@ -5,6 +5,8 @@ const pantryItemsController = require("./pantryItems.controller");
 const favoritesController = require("./favorites.controller");
 const recipesController = require("./recipes.controller");
 const mealCategoriesController = require("./mealCategories.controller");
+const ratingController = require("./rating.controller");
+const commentsController = require("./comments.controller");
 
 const router = express.Router();
 
@@ -29,6 +31,18 @@ router.get("/recipes/:mealId/check-pantry", auth, recipesController.checkPantry)
 router.get("/recipes/:mealId", recipesController.detail);
 
 router.get("/meal-categories/:category", auth, mealCategoriesController.search);
+
+router.get("/ratings/:mealId", auth, ratingController.list);
+router.post("/ratings", auth, ratingController.create);
+router.patch("/ratings/:id", auth, ratingController.update);
+router.delete("/ratings/:id", auth, ratingController.deleteItem);
+
+router.get("/comments/:mealId", auth, commentsController.list);
+router.post("/comments", auth, commentsController.create);
+router.patch("/comments/:id", auth, commentsController.update);
+router.delete("/comments/:id", auth, commentsController.deleteItem);
+
+
 
 
 module.exports = router;

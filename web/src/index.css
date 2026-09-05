@@ -39,6 +39,161 @@ h1, h2, h3, h4, h5, h6 {
   gap: 20px;
 }
 
+.rating {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rating__title {
+  font-size: 1.25rem;
+}
+
+.rating__summary {
+  color: #cccccc;
+}
+
+.rating__stars {
+  display: flex;
+  gap: 4px;
+}
+
+.rating__star {
+  padding: 0;
+  border: none;
+  color: #777777;
+  background: transparent;
+  cursor: pointer;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.rating__star:hover,
+.rating__star:focus-visible,
+.rating__star--selected {
+  color: #ffd166;
+}
+
+.rating__star:disabled {
+  cursor: wait;
+}
+
+.rating__feedback,
+.rating__error {
+  font-size: 0.9rem;
+}
+
+.rating__error {
+  color: #eb0c0c;
+}
+
+.rating__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 500px;
+}
+
+.rating__list-title {
+  font-size: 1rem;
+}
+
+.rating__item {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) auto auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.rating__item-stars {
+  color: #ffd166;
+  letter-spacing: 0;
+}
+
+.rating__item-value {
+  color: #cccccc;
+  font-size: 0.9rem;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 700px;
+}
+
+.comments__title {
+  font-size: 1.25rem;
+}
+
+.comments__form,
+.comments__edit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comments textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border: 1px solid #555555;
+  border-radius: 4px;
+  resize: vertical;
+  font: inherit;
+}
+
+.comments button {
+  align-self: flex-start;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.75);
+  color: #000000;
+  cursor: pointer;
+}
+
+.comments button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.comments__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comments__item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #333333;
+  border-radius: 4px;
+}
+
+.comments__item-header,
+.comments__actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.comments__item-header span {
+  color: #cccccc;
+  font-size: 0.85rem;
+}
+
+.comments__text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.comments__error {
+  color: #eb0c0c;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;

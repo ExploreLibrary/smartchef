@@ -42,10 +42,14 @@ export const updatePost = (id, data) => http.patch(`/posts/${id}`, data);
 export const deletePost = (id) => http.delete(`/posts/${id}`);
 
 // --- Comments ---
-export const createComment = (postId, data) =>
-  http.post(`/posts/${postId}/comments`, data);
-export const deleteComment = (postId, commentId) =>
-  http.delete(`/posts/${postId}/comments/${commentId}`);
+export const listComments = (mealId) =>
+  http.get(`/comments/${mealId}`);
+export const createComment = (data) =>
+  http.post("/comments", data);
+export const updateComment = (commentId, data) =>
+  http.patch(`/comments/${commentId}`, data);
+export const deleteComment = (commentId) =>
+  http.delete(`/comments/${commentId}`);
 
 // --- Favorites ---
 export const listFavorites = () => http.get("/favorites");
@@ -89,6 +93,12 @@ export const getRecipeDetail = (mealId) =>
 
 export const checkPantry = (mealId) =>
   http.get(`/recipes/${mealId}/check-pantry`);
+
+export const listRatings = (mealId) =>
+  http.get(`/ratings/${mealId}`);
+
+export const createRating = (data) =>
+  http.post("/ratings", data);
 
 // --- Meal Categories ---
 export const getMealsByCategory = (category) => 
