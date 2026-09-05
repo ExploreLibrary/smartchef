@@ -49,6 +49,10 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.25rem;
 }
 
+.rating__summary {
+  color: #cccccc;
+}
+
 .rating__stars {
   display: flex;
   gap: 4px;
@@ -81,6 +85,34 @@ h1, h2, h3, h4, h5, h6 {
 
 .rating__error {
   color: #eb0c0c;
+}
+
+.rating__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 500px;
+}
+
+.rating__list-title {
+  font-size: 1rem;
+}
+
+.rating__item {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) auto auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.rating__item-stars {
+  color: #ffd166;
+  letter-spacing: 0;
+}
+
+.rating__item-value {
+  color: #cccccc;
+  font-size: 0.9rem;
 }
 
 .navbar {

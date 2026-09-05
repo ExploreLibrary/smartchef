@@ -4,13 +4,22 @@ const create = async (req, res, next) => {
   try {
     const { mealId, rating } = req.body;
 
-    const ratingDoc = await Rating.create({
-      mealId,
-      rating,
-      user: req.user._id
-    });
+    const ratingDoc = await Rating.findOneAndUpdate(
+      {
+        mealId,
+        user: req.user._id
+      },
+      { rating },
+      {
+        new: true,
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true
+      }
+    );
 
-    res.status(201).json(ratingDoc);
+    await ratingDoc.populate("user", "name username");
+    res.json(ratingDoc);
   } catch (error) {
     next(error);
   }
@@ -18,11 +27,25 @@ const create = async (req, res, next) => {
 
 const list = async (req, res, next) => {
   try {
-    const rating = await Rating.find({
+    const ratings = await Rating.find({
       mealId: req.params.mealId
+    })
+      .populate("user", "name username")
+      .sort({ updatedAt: -1 });
+
+    const usersWithRating = new Set();
+    const uniqueRatings = ratings.filter((ratingDoc) => {
+      const userId = ratingDoc.user?._id?.toString() || ratingDoc.id;
+
+      if (usersWithRating.has(userId)) {
+        return false;
+      }
+
+      usersWithRating.add(userId);
+      return true;
     });
 
-    res.json(rating);
+    res.json(uniqueRatings);
   } catch (error) {
     next(error);
   }
