@@ -1,0 +1,19 @@
+[build]
+  # Installs and builds the frontend (web/), then installs the backend's
+  # dependencies (api/) so Netlify's function bundler can resolve them.
+  command = "npm --prefix web ci && npm --prefix web run build && npm --prefix api ci"
+  publish = "web/dist"
+  functions = "api/netlify/functions"
+
+# API requests are routed to the Express app running as a Netlify Function.
+# Order matters: this must come before the SPA catch-all below.
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# Client-side routing (react-router): let the SPA handle any other path.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
