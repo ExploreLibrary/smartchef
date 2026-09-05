@@ -34,13 +34,6 @@ export const signup = (data) => http.post("/users", data);
 export const logout = () => http.delete("/users/logout");
 export const getProfile = () => http.get("/users/profile");
 
-// --- Posts ---
-export const listPosts = () => http.get("/posts");
-export const getPost = (id) => http.get(`/posts/${id}`);
-export const createPost = (data) => http.post("/posts", data);
-export const updatePost = (id, data) => http.patch(`/posts/${id}`, data);
-export const deletePost = (id) => http.delete(`/posts/${id}`);
-
 // --- Comments ---
 export const listComments = (mealId) =>
   http.get(`/comments/${mealId}`);
