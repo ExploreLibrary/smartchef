@@ -1,5 +1,5 @@
 import FavoriteButton from "../favorite-button/favorite-button";
-import Review from "../review/review";
+import Rating from "../rating/rating";
 
 function RecipeDetail({ recipeData, onCheckPantry, pantryCheck, pantryLoading, pantryError }) {
   const recipe = recipeData ?? {};
@@ -120,6 +120,8 @@ function RecipeDetail({ recipeData, onCheckPantry, pantryCheck, pantryLoading, p
         </section>
       )}
 
+      <Rating mealId={recipe.idMeal} />
+
       {/* CHECK PANTRY */}
       <section className="recipe-detail__pantry">
         <button
@@ -189,12 +191,6 @@ function RecipeDetail({ recipeData, onCheckPantry, pantryCheck, pantryLoading, p
               )}
             </div>
             
-            {/* REVIEW */}
-            <div>
-                <Review/>
-            </div>
-
-
           </div>
         )}
       </section>

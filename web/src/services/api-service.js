@@ -90,6 +90,9 @@ export const getRecipeDetail = (mealId) =>
 export const checkPantry = (mealId) =>
   http.get(`/recipes/${mealId}/check-pantry`);
 
+export const listRatings = (mealId) =>
+  http.get(`/ratings/${mealId}`);
+
 // --- Meal Categories ---
 export const getMealsByCategory = (category) => 
   http.get(`/meal-categories/${category}`);

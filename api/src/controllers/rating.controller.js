@@ -1,16 +1,16 @@
-const Favorite = require("../lib/models/review.model");
+const Rating = require("../lib/models/rating.model");
 
 const create = async (req, res, next) => {
   try {
     const { mealId, rating } = req.body;
 
-    const review = await Review.create({
+    const ratingDoc = await Rating.create({
       mealId,
       rating,
       user: req.user._id
     });
 
-    res.status(201).json(review);
+    res.status(201).json(ratingDoc);
   } catch (error) {
     next(error);
   }
@@ -18,30 +18,34 @@ const create = async (req, res, next) => {
 
 const list = async (req, res, next) => {
   try {
-    const review = await Review.find({
+    const rating = await Rating.find({
       mealId: req.params.mealId
     });
 
-    res.json(review);
+    res.json(rating);
   } catch (error) {
     next(error);
   }
 };
 
 const update = async (req, res, next) => {
-    try {
-    const review = await Review.findOneAndUpdate(
-        {
-            _id: req.params.id,
-             user: req.user._id,
-             rating
-        }
+  try {
+    const { rating } = req.body;
+
+    const ratingDoc = await Rating.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        user: req.user._id
+      },
+      { rating },
+      { new: true, runValidators: true }
     );
-    if (!review) {
+
+    if (!ratingDoc) {
       return res.sendStatus(404);
     }
 
-    res.json(review);
+    res.json(ratingDoc);
   } catch (error) {
     next(error);
   }
@@ -49,12 +53,12 @@ const update = async (req, res, next) => {
 
 const deleteItem = async (req, res, next) => {
   try {
-    const review = await Review.findOneAndDelete({
+    const ratingDoc = await Rating.findOneAndDelete({
       _id: req.params.id,
       user: req.user._id
     });
 
-    if (!review) {
+    if (!ratingDoc) {
       return res.sendStatus(404);
     }
 

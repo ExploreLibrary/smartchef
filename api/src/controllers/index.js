@@ -5,6 +5,7 @@ const pantryItemsController = require("./pantryItems.controller");
 const favoritesController = require("./favorites.controller");
 const recipesController = require("./recipes.controller");
 const mealCategoriesController = require("./mealCategories.controller");
+const ratingController = require("./rating.controller");
 
 const router = express.Router();
 
@@ -29,6 +30,11 @@ router.get("/recipes/:mealId/check-pantry", auth, recipesController.checkPantry)
 router.get("/recipes/:mealId", recipesController.detail);
 
 router.get("/meal-categories/:category", auth, mealCategoriesController.search);
+
+router.get("/ratings/:mealId", auth, ratingController.list);
+router.post("/ratings", auth, ratingController.create);
+router.patch("/ratings/:id", auth, ratingController.update);
+router.delete("/ratings/:id", auth, ratingController.deleteItem);
 
 
 

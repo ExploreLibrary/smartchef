@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const reviewSchema = new mongoose.Schema(
+const ratingSchema = new mongoose.Schema(
   {
     mealId: {
       type: String,
@@ -34,4 +34,4 @@ const reviewSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Review", reviewSchema);
+module.exports = mongoose.model("Rating", ratingSchema);
