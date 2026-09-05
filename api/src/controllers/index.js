@@ -31,4 +31,6 @@ router.get("/recipes/:mealId", recipesController.detail);
 router.get("/meal-categories/:category", auth, mealCategoriesController.search);
 
 
+
+
 module.exports = router;
