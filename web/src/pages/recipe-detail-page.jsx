@@ -48,22 +48,30 @@ function RecipeDetailPage() {
     fetchRecipe();
   }, [mealId]);
 
-  const handleCheckPantry = async () => {
-    try {
-      setPantryLoading(true);
-      setPantryError(false);
+  useEffect(() => {
+    async function fetchPantry() {
+      if (!mealId) {
+        return;
+      }
 
-      const response = await checkPantry(mealId);
+      try {
+        setPantryLoading(true);
+        setPantryError(false);
 
-      setPantryCheck(response);
-    } catch (error) {
-      console.error("Error checking pantry:", error);
-      setPantryError(true);
-      setPantryCheck(null);
-    } finally {
-      setPantryLoading(false);
+        const response = await checkPantry(mealId);
+
+        setPantryCheck(response);
+      } catch (error) {
+        console.error("Error checking pantry:", error);
+        setPantryError(true);
+        setPantryCheck(null);
+      } finally {
+        setPantryLoading(false);
+      }
     }
-  };
+
+    fetchPantry();
+  }, [mealId]);
 
   return (
     <PageLayout>
@@ -76,7 +84,6 @@ function RecipeDetailPage() {
       {!loading && !isError && (
         <RecipeDetail
           recipeData={recipe}
-          onCheckPantry={handleCheckPantry}
           pantryCheck={pantryCheck}
           pantryLoading={pantryLoading}
           pantryError={pantryError}

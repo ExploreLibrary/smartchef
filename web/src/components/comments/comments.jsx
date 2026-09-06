@@ -137,99 +137,108 @@ function Comments({ mealId }) {
     <section className="comments" aria-labelledby="comments-title">
       <h2 id="comments-title" className="comments__title">Comments</h2>
 
-      <form className="comments__form" onSubmit={handleCreate}>
-        <label htmlFor="new-comment">Add a comment</label>
-        <textarea
-          id="new-comment"
-          value={commentText}
-          onChange={(event) => setCommentText(event.target.value)}
-          placeholder="Write your comment"
-          rows="3"
-          maxLength="500"
-          disabled={isSaving}
-        />
-        <button type="submit" disabled={!commentText.trim() || isSaving}>
-          {isSaving ? "Saving..." : "Publish comment"}
-        </button>
-      </form>
+      <div className="comments__container">
 
-      {error && <p className="comments__error" role="alert">{error}</p>}
+        <div className="comments__subsection">
 
-      {isLoading ? (
-        <p>Loading comments...</p>
-      ) : comments.length === 0 ? (
-        <p>No comments yet.</p>
-      ) : (
-        <div className="comments__list">
-          {comments.map((item) => {
-            const commentUser = item.user ?? {};
-            const commentUserId = commentUser.id ?? commentUser._id ?? commentUser;
-            const userName = commentUser.name || commentUser.username || "User";
-            const isOwnComment = String(commentUserId) === String(currentUserId);
+            <form className="comments__form" onSubmit={handleCreate}>
+              <label htmlFor="new-comment">Add a comment</label>
+              <textarea
+                id="new-comment"
+                value={commentText}
+                onChange={(event) => setCommentText(event.target.value)}
+                placeholder="Write your comment"
+                rows="3"
+                maxLength="500"
+                disabled={isSaving}
+              />
+              <button type="submit" disabled={!commentText.trim() || isSaving}>
+                {isSaving ? "Saving..." : "Publish comment"}
+              </button>
+            </form>
 
-            return (
-              <article className="comments__item" key={item.id}>
-                <div className="comments__item-header">
-                  <strong>{userName}</strong>
-                  {isOwnComment && <span>Your comment</span>}
-                </div>
+            {error && <p className="comments__error" role="alert">{error}</p>}
 
-                {editingId === item.id ? (
-                  <div className="comments__edit">
-                    <textarea
-                      value={editingText}
-                      onChange={(event) => setEditingText(event.target.value)}
-                      rows="3"
-                      maxLength="500"
-                      disabled={isSaving}
-                    />
-                    <div className="comments__actions">
-                      <button
-                        type="button"
-                        onClick={() => handleUpdate(item.id)}
-                        disabled={!editingText.trim() || isSaving}
-                      >
-                        Save
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setEditingId(null)}
-                        disabled={isSaving}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <p className="comments__text">{item.comment}</p>
-                )}
-
-                {isOwnComment && editingId !== item.id && (
-                  <div className="comments__actions">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setEditingId(item.id);
-                        setEditingText(item.comment);
-                      }}
-                      disabled={isSaving}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(item.id)}
-                      disabled={isSaving}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                )}
-              </article>
-            );
-          })}
         </div>
-      )}
+        
+        <div className="comments__subsection">
+            {isLoading ? (
+              <p>Loading comments...</p>
+            ) : comments.length === 0 ? (
+              <p>No comments yet.</p>
+            ) : (
+              <div className="comments__list">
+                {comments.map((item) => {
+                  const commentUser = item.user ?? {};
+                  const commentUserId = commentUser.id ?? commentUser._id ?? commentUser;
+                  const userName = commentUser.name || commentUser.username || "User";
+                  const isOwnComment = String(commentUserId) === String(currentUserId);
+
+                  return (
+                    <article className="comments__item" key={item.id}>
+                      <div className="comments__item-header">
+                        <strong>{userName}</strong>
+                        {isOwnComment && <span>Your comment</span>}
+                      </div>
+
+                      {editingId === item.id ? (
+                        <div className="comments__edit">
+                          <textarea
+                            value={editingText}
+                            onChange={(event) => setEditingText(event.target.value)}
+                            rows="3"
+                            maxLength="500"
+                            disabled={isSaving}
+                          />
+                          <div className="comments__actions">
+                            <button
+                              type="button"
+                              onClick={() => handleUpdate(item.id)}
+                              disabled={!editingText.trim() || isSaving}
+                            >
+                              Save
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setEditingId(null)}
+                              disabled={isSaving}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="comments__text">{item.comment}</p>
+                      )}
+
+                      {isOwnComment && editingId !== item.id && (
+                        <div className="comments__actions">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditingId(item.id);
+                              setEditingText(item.comment);
+                            }}
+                            disabled={isSaving}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(item.id)}
+                            disabled={isSaving}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
+                    </article>
+                  );
+                })}
+              </div>
+            )}
+            </div>
+      </div>
     </section>
   );
 }
