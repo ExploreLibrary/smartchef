@@ -820,6 +820,10 @@ h1, h2, h3, h4, h5, h6 {
   flex: 0 0 calc(50% - 50px);
 }
 
+.pantry-list * {
+  line-height: 1.5;
+}
+
 .pantry-item {
   background-color: #222222;
   padding: 20px;
@@ -863,6 +867,10 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   gap: 20px;
   border: 1px solid #ffffff;
+}
+
+.pantry-form * {
+  line-height: 1.5;
 }
 
 .recipe-detail__info {
