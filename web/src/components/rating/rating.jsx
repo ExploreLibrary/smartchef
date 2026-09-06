@@ -97,53 +97,62 @@ function Rating({ mealId }) {
     : 0;
 
   return (
-    <section className="rating" aria-labelledby="rating-title">
-      <h2 id="rating-title" className="rating__title">My rating</h2>
+    <section className="rating rating_container" aria-labelledby="rating-title">
+      <div className="rating__subsection">
+        <h2>Ratings</h2>
+      </div>
+      <div className="rating__subsection">
+        <h3 className="rating__my-rating-title">My rating</h3>
 
-      <p className="rating__summary" aria-live="polite">
-        {isLoading
-          ? "Loading ratings..."
-          : `${averageRating ? averageRating.toFixed(1) : "0.0"} / 5 (${ratings.length} ${ratings.length === 1 ? "vote" : "votes"})`}
-      </p>
+        <p className="rating__summary" aria-live="polite">
+          {isLoading
+            ? "Loading ratings..."
+            : `${averageRating ? averageRating.toFixed(1) : "0.0"} / 5 (${ratings.length} ${ratings.length === 1 ? "vote" : "votes"})`}
+        </p>
 
-      <div className="rating__stars" role="group" aria-label="Rate this recipe from 1 to 5 stars">
-        {[1, 2, 3, 4, 5].map((rating) => (
-          <button
-            key={rating}
-            className={`rating__star ${rating <= selectedRating ? "rating__star--selected" : ""}`}
-            type="button"
-            aria-label={`${rating} ${rating === 1 ? "star" : "stars"}`}
-            aria-pressed={rating === selectedRating}
-            onClick={() => handleRating(rating)}
-            disabled={!mealId || isLoading || isSaving}
-          >
-            {rating <= selectedRating ? "★" : "☆"}
-          </button>
-        ))}
+        <div className="rating__stars" role="group" aria-label="Rate this recipe from 1 to 5 stars">
+          {[1, 2, 3, 4, 5].map((rating) => (
+            <button
+              key={rating}
+              className={`rating__star ${rating <= selectedRating ? "rating__star--selected" : ""}`}
+              type="button"
+              aria-label={`${rating} ${rating === 1 ? "star" : "stars"}`}
+              aria-pressed={rating === selectedRating}
+              onClick={() => handleRating(rating)}
+              disabled={!mealId || isLoading || isSaving}
+            >
+              {rating <= selectedRating ? "★" : "☆"}
+            </button>
+          ))}
+        </div>
+      
+
+        {savedRating > 0 && !error && <p className="rating__feedback">Your rating: {savedRating} / 5</p>}
+        {error && <p className="rating__error" role="alert">{error}</p>}
       </div>
 
-      {savedRating > 0 && !error && <p className="rating__feedback">Your rating: {savedRating} / 5</p>}
-      {error && <p className="rating__error" role="alert">{error}</p>}
+      <div className="rating__subsection">
 
-      {!isLoading && ratings.length > 0 && (
-        <div className="rating__list">
-          <h3 className="rating__list-title">Ratings</h3>
-          {ratings.map((item) => {
-            const ratingUser = item.user ?? {};
-            const userName = ratingUser.name || ratingUser.username || "User";
+        {!isLoading && ratings.length > 0 && (
+          <div className="rating__list">
+            <h3 className="rating__list-title">All ratings</h3>
+            {ratings.map((item) => {
+              const ratingUser = item.user ?? {};
+              const userName = ratingUser.name || ratingUser.username || "User";
 
-            return (
-              <div className="rating__item" key={item.id}>
-                <span className="rating__user">{userName}</span>
-                <span className="rating__item-stars" aria-label={`${item.rating} out of 5 stars`}>
-                  {"★".repeat(item.rating)}{"☆".repeat(5 - item.rating)}
-                </span>
-                <span className="rating__item-value">{item.rating}/5</span>
-              </div>
-            );
-          })}
-        </div>
-      )}
+              return (
+                <div className="rating__item" key={item.id}>
+                  <span className="rating__user">{userName}</span>
+                  <span className="rating__item-stars" aria-label={`${item.rating} out of 5 stars`}>
+                    {"★".repeat(item.rating)}{"☆".repeat(5 - item.rating)}
+                  </span>
+                  <span className="rating__item-value">{item.rating}/5</span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </section>
   );
 }

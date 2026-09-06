@@ -52,9 +52,11 @@ function PantryForm({ onItemCreated }) {
 							{...register("ingredient", {
 								required: "El ingrediente es obligatorio",
 							})}
-							placeholder="Tomato"
+							placeholder="e.g. tomato"
 						/>
-						{errors.ingredient && <p>{errors.ingredient.message}</p>}
+						{errors.ingredient && (
+							<p className="pantry-form__field-error">{errors.ingredient.message}</p>
+						)}
 					</div>
 
 					<div className="pantry-form__field">
@@ -68,9 +70,11 @@ function PantryForm({ onItemCreated }) {
 								required: "La cantidad es obligatoria",
 								min: { value: 0.01, message: "La cantidad debe ser mayor que cero" },
 							})}
-							placeholder="1"
+							placeholder="e.g. 1"
 						/>
-						{errors.quantity && <p>{errors.quantity.message}</p>}
+						{errors.quantity && (
+							<p className="pantry-form__field-error">{errors.quantity.message}</p>
+						)}
 					</div>
 
 					<div className="pantry-form__field">
@@ -79,9 +83,11 @@ function PantryForm({ onItemCreated }) {
 							id="unit"
 							type="text"
 							{...register("unit", { required: "La unidad es obligatoria" })}
-							placeholder="kg"
+							placeholder="e.g. kg"
 						/>
-						{errors.unit && <p>{errors.unit.message}</p>}
+						{errors.unit && (
+							<p className="pantry-form__field-error">{errors.unit.message}</p>
+						)}
 					</div>
 				</div>
 

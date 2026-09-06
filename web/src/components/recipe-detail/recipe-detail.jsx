@@ -2,7 +2,7 @@ import FavoriteButton from "../favorite-button/favorite-button";
 import Rating from "../rating/rating";
 import Comments from "../comments/comments";
 
-function RecipeDetail({ recipeData, onCheckPantry, pantryCheck, pantryLoading, pantryError }) {
+function RecipeDetail({ recipeData, pantryCheck, pantryLoading, pantryError }) {
   const recipe = recipeData ?? {};
 
   const ingredients = [];
@@ -69,133 +69,151 @@ function RecipeDetail({ recipeData, onCheckPantry, pantryCheck, pantryLoading, p
         )}
       </div>
 
-      {/* INSTRUCTIONS */}
-      <section className="recipe-detail__instructions">
-        <h2>Instructions</h2>
+      <div className="recipe-detail__info-container">
 
-        <p>
-          {recipe.strInstructions ??
-            "Instructions not available"}
-        </p>
-      </section>
+        {/* INSTRUCTIONS */}
+        <section className="recipe-detail__instructions">
+          <h2>Instructions</h2>
 
-      {/* INGREDIENTS */}
-      <section className="recipe-detail__ingredients">
-        <h2>Ingredients</h2>
-
-        {ingredients.length === 0 ? (
-          <p>Ingredients not available.</p>
-        ) : (
-          <ul className="recipe-detail__ingredients-list">
-            {ingredients.map((item, index) => (
-              <li
-                key={`${item.ingredient}-${index}`}
-                className="recipe-detail__ingredient"
-              >
-                <span className="recipe-detail__ingredient-measure">
-                  {item.measure}
-                </span>
-
-                <span>
-                  {item.ingredient}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      {/* YOUTUBE */}
-      {recipe.strYoutube && (
-        <section className="recipe-detail__youtube">
-          <h2>Video</h2>
-
-          <a
-            className="recipe-detail__youtube-link"
-            href={recipe.strYoutube}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Watch on YouTube
-          </a>
-        </section>
-      )}
-
-      <Rating mealId={recipe.idMeal} />
-      <Comments mealId={recipe.idMeal} />
-
-      {/* CHECK PANTRY */}
-      <section className="recipe-detail__pantry">
-        <button
-          className="recipe-detail__pantry-button"
-          type="button"
-          onClick={onCheckPantry}
-          disabled={pantryLoading}
-        >
-          {pantryLoading
-            ? "Checking pantry..."
-            : "Check my pantry"}
-        </button>
-
-        {pantryError && (
-          <p className="recipe-detail__pantry-error">
-            Unable to check your pantry.
+          <p>
+            {recipe.strInstructions ??
+              "Instructions not available"}
           </p>
-        )}
+        </section>
 
-        {pantryCheck && (
-          <div className="recipe-detail__pantry-results">
+        <div className="recipe-detail__ingredients-section">
 
-            {/* AVAILABLE */}
-            <div className="recipe-detail__pantry-column">
-              <h2>Available</h2>
+          <div className="recipe-detail__ingredients-subsection">
 
-              {pantryCheck.available?.length === 0 ? (
-                <p>
-                  You don't have any of the required
-                  ingredients.
-                </p>
-              ) : (
-                <ul>
-                  {pantryCheck.available.map(
-                    (ingredient, index) => (
-                      <li
-                        key={`${ingredient}-${index}`}
-                      >
-                        {ingredient}
-                      </li>
-                    )
+                {/* INGREDIENTS */}
+                <section className="recipe-detail__ingredients">
+                  <h2>Ingredients</h2>
+
+                  {ingredients.length === 0 ? (
+                    <p>Ingredients not available.</p>
+                  ) : (
+                    <ul className="recipe-detail__ingredients-list">
+                      {ingredients.map((item, index) => (
+                        <li
+                          key={`${item.ingredient}-${index}`}
+                          className="recipe-detail__ingredient"
+                        >
+                          <span className="recipe-detail__ingredient-measure">
+                            {item.measure}
+                          </span>
+
+                          <span>
+                            {item.ingredient}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
                   )}
-                </ul>
-              )}
-            </div>
+                </section>
 
-            {/* MISSING */}
-            <div className="recipe-detail__pantry-column">
-              <h2>Missing</h2>
-
-              {pantryCheck.missing?.length === 0 ? (
-                <p>
-                  You have all the required ingredients!
-                </p>
-              ) : (
-                <ul>
-                  {pantryCheck.missing.map(
-                    (ingredient, index) => (
-                      <li
-                        key={`${ingredient}-${index}`}
-                      >
-                        {ingredient}
-                      </li>
-                    )
-                  )}
-                </ul>
-              )}
-            </div>
-            
           </div>
+
+          <div className="recipe-detail__ingredients-subsection">
+
+                {/* CHECK PANTRY */}
+                <section className="recipe-detail__pantry">
+                  <h2>Pantry Check</h2>
+
+                  {pantryLoading && (
+                    <p>Checking pantry...</p>
+                  )}
+
+                  {pantryError && (
+                    <p className="recipe-detail__pantry-error">
+                      Unable to check your pantry.
+                    </p>
+                  )}
+
+                  {pantryCheck && (
+                    <div className="recipe-detail__pantry-results">
+
+                      {/* AVAILABLE */}
+                      <div className="recipe-detail__pantry-column">
+                        <h3>Available</h3>
+
+                        {pantryCheck.available?.length === 0 ? (
+                          <p>
+                            You don't have any of the required
+                            ingredients.
+                          </p>
+                        ) : (
+                          <ul>
+                            {pantryCheck.available.map(
+                              (ingredient, index) => (
+                                <li
+                                  key={`${ingredient}-${index}`}
+                                >
+                                  {ingredient}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        )}
+                      </div>
+
+                      {/* MISSING */}
+                      <div className="recipe-detail__pantry-column">
+                        <h3>Missing</h3>
+
+                        {pantryCheck.missing?.length === 0 ? (
+                          <p>
+                            You have all the required ingredients!
+                          </p>
+                        ) : (
+                          <ul>
+                            {pantryCheck.missing.map(
+                              (ingredient, index) => (
+                                <li
+                                  key={`${ingredient}-${index}`}
+                                >
+                                  {ingredient}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        )}
+                      </div>
+
+                    </div>
+                  )}
+                </section>
+          </div>
+        </div>
+
+        <div className="recipe-detail__ratings-comments-section">
+
+          <div className="recipe-detail__ratings-comments-subsection">
+            <Rating mealId={recipe.idMeal} />
+          </div>
+
+          <div className="recipe-detail__ratings-comments-subsection">
+            <Comments mealId={recipe.idMeal} />
+          </div>
+
+        </div>
+
+        {/* YOUTUBE */}
+        {recipe.strYoutube && (
+          <section className="recipe-detail__youtube">
+            <h2>Instructions Video</h2>
+
+            <a
+              className="recipe-detail__youtube-link"
+              href={recipe.strYoutube}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Watch on YouTube
+            </a>
+          </section>
         )}
-      </section>
+
+      </div>
 
     </div>
   );
