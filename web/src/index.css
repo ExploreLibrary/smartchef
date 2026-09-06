@@ -802,11 +802,15 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 40px;
 }
 
+.my-pantry__outer-container {
+  padding-block: 50px;
+}
+
 .my-pantry__container {
   display: flex;
   gap: 100px;
   width: 100%;
-  padding-block: 50px;
+  padding-top: 40px;
 }
 
 .pantry-list-container {
@@ -873,6 +877,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .pantry-form-container {
   flex: 0 0 calc(50% - 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .pantry-form__container {
