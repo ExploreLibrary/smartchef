@@ -7,7 +7,7 @@ function PantryList({ pantryData, onItemCreated, onItemDeleted }) {
   return (
     <div className="my-pantry__container">
       <div className="pantry-list-container">
-          <h2>My Pantry</h2>
+          <h2 className="pantry-list-container__title">My Pantry</h2>
           <div className="pantry-list">
               {items.length > 0 ? (
               <ul>
@@ -18,9 +18,7 @@ function PantryList({ pantryData, onItemCreated, onItemDeleted }) {
                   ))}
               </ul>
               ) : (
-                <>
-                <p>Your pantry is empty.</p>
-              </>
+                <p className="pantry-list__empty">Your pantry is empty.</p>
               )}
           </div>
       </div>
