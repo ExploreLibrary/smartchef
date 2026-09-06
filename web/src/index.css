@@ -802,16 +802,22 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 40px;
 }
 
-.pantry-list-container {
-  width: 100%;
+.my-pantry__container {
   display: flex;
+  gap: 100px;
+  width: 100%;
+  padding-block: 50px;
+}
+
+.pantry-list-container {
+  flex: 0 0 calc(50% - 50px);
 }
 
 .pantry-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  flex: 0 0 calc(50% - 20px);
+  flex: 0 0 calc(50% - 50px);
 }
 
 .pantry-item {
@@ -843,6 +849,10 @@ h1, h2, h3, h4, h5, h6 {
 .pantry-item__delete-button:disabled {
   cursor: wait;
   opacity: 0.5;
+}
+
+.pantry-form-container {
+  flex: 0 0 calc(50% - 50px);
 }
 
 .pantry-form {
