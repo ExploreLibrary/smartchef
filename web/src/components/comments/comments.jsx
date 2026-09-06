@@ -135,7 +135,7 @@ function Comments({ mealId }) {
 
   return (
     <section className="comments" aria-labelledby="comments-title">
-      <h2 id="comments-title" className="comments__title">Comments</h2>
+      <h2 id="comments-title">Comments</h2>
 
       <div className="comments__container">
 
