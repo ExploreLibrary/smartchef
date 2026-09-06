@@ -196,77 +196,83 @@ function RecipeSearchPage() {
         </form>
 
         <section className="recipe-search-results">
-
-          <h2>Search results</h2>
-
           {loading && (
-            <p>Searching recipes...</p>
+            <>
+              <h2>Search results</h2>
+              <p>Searching recipes...</p>
+            </>
           )}
 
           {!loading && isError && (
-            <p>
-              Unable to search recipes.
-            </p>
+            <>
+              <h2>Search results</h2>
+              <p>Unable to search recipes.</p>
+            </>
           )}
 
           {!loading &&
             !isError &&
             hasSearched &&
             recipes.length === 0 && (
-              <p>
-                No recipes found with these filters.
-              </p>
+              <>
+                <h2>Search results</h2>
+                <p>No recipes found with these filters.</p>
+              </>
             )}
 
           {!loading &&
             !isError &&
             recipes.length > 0 && (
 
-              <div className="gallery">
+              <>
+                <h2>Search results</h2>
 
-                {recipes.map((recipe) => (
+                <div className="gallery">
 
-                  <article
-                    className="gallery__meal"
-                    key={recipe.idMeal}
-                  >
+                  {recipes.map((recipe) => (
 
-                    <Link
-                      className="gallery__meal-img-link"
-                      to={`/recipes/${recipe.idMeal}`}
+                    <article
+                      className="gallery__meal"
+                      key={recipe.idMeal}
                     >
-                      <div className="gallery__meal-img-container">
 
-                        <img
-                          src={recipe.strMealThumb}
-                          alt={recipe.strMeal}
-                        />
+                      <Link
+                        className="gallery__meal-img-link"
+                        to={`/recipes/${recipe.idMeal}`}
+                      >
+                        <div className="gallery__meal-img-container">
 
-                      </div>
-                    </Link>
+                          <img
+                            src={recipe.strMealThumb}
+                            alt={recipe.strMeal}
+                          />
 
-                    <h4>
-                      {recipe.strMeal}
-                    </h4>
+                        </div>
+                      </Link>
 
-                    {recipe.strArea && (
-                      <p>
-                        {recipe.strArea}
-                      </p>
-                    )}
+                      <h4>
+                        {recipe.strMeal}
+                      </h4>
 
-                    <Link
-                      className="gallery__meal-link"
-                      to={`/recipes/${recipe.idMeal}`}
-                    >
-                      View recipe
-                    </Link>
+                      {recipe.strArea && (
+                        <p>
+                          {recipe.strArea}
+                        </p>
+                      )}
 
-                  </article>
+                      <Link
+                        className="gallery__meal-link"
+                        to={`/recipes/${recipe.idMeal}`}
+                      >
+                        View recipe
+                      </Link>
 
-                ))}
+                    </article>
 
-              </div>
+                  ))}
+
+                </div>
+              </>
             )}
 
         </section>
